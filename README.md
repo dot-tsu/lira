@@ -4,6 +4,7 @@ Pianero will be interactive web app that makes learning piano chords and scales 
 
 ## Tech Stack
 
+- TypeScript
 - Astro
 - React
 - Tailwind CSS
