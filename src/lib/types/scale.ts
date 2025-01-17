@@ -1,6 +1,6 @@
-import Chord from "@/lib/types/chord"
-import Interval from "@/lib/types/interval"
-import Note from "@/lib/types/note"
+import type Chord from "@/lib/types/chord"
+import type Interval from "@/lib/types/interval"
+import type Note from "@/lib/types/note"
 
 
 /**

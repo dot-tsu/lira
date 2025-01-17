@@ -37,7 +37,7 @@ export default interface Note {
      * The octave number. Standard notation uses numbers 0-8,
      * where middle C is in octave 4
      */
-    octave: number
+    octave?: number
     
     /** 
      * The frequency of the note in Hertz (Hz)
@@ -56,5 +56,5 @@ export default interface Note {
      * (notes that sound the same but are written differently)
      * e.g., C# and Db
      */
-    enharmonics: Note[]
+    enharmonics?: Note[]
 }
