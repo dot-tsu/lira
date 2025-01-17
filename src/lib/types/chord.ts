@@ -10,7 +10,7 @@ import type Note from "@/lib/types/note"
  * - half-diminished: Half-diminished seventh (1, ♭3, ♭5, ♭7)
  * - dominant: Dominant seventh (1, 3, 5, ♭7)
  */
-export type ChordQuality = 'major' | 'minor' | 'diminished' | 'augmented' | 'half-diminished' | 'dominant';
+export type ChordQuality = 'major' | 'minor' | 'diminished' | 'augmented' | 'half-diminished' | 'dominant'
 
 /**
  * Available chord extensions beyond the basic triad.
@@ -19,7 +19,7 @@ export type ChordQuality = 'major' | 'minor' | 'diminished' | 'augmented' | 'hal
  * - 11: Includes 7th, 9th, and adds the 11th (4th up an octave)
  * - 13: Includes 7th, 9th, 11th, and adds the 13th (6th up an octave)
  */
-export type ChordExtension = '7' | '9' | '11' | '13';
+export type ChordExtension = '7' | '9' | '11' | '13'
 
 /**
  * Represents a musical chord - three or more notes played together.
@@ -31,29 +31,29 @@ export type ChordExtension = '7' | '9' | '11' | '13';
  *   inversion: 0,
  *   notes: [C, E, G, B],
  *   symbol: 'Cmaj7'
- * };
+ * }
  */
 export default interface Chord {
     /** The root note of the chord */
-    root: Note;
+    root: Note
     
     /** Basic quality of the chord */
-    quality: ChordQuality;
+    quality: ChordQuality
     
     /** Extension beyond the basic triad */
-    extension?: ChordExtension;
+    extension?: ChordExtension
     
     /** 
      * Additional notes beyond the basic chord structure
      * @example [9, 11, 13] for extended chords 
      */
-    added?: number[];
+    added?: number[]
     
     /** 
      * Indicates if the chord is suspended
      * @example 2 for sus2, 4 for sus4
      */
-    suspended?: number;
+    suspended?: number
     
     /** 
      * Inversion number:
@@ -62,17 +62,17 @@ export default interface Chord {
      * - 2: second inversion
      * - 3: third inversion (seventh chords only)
      */
-    inversion: number;
+    inversion: number
     
     /** All notes in the chord, in order from lowest to highest */
-    notes: Note[];
+    notes: Note[]
     
     /** Intervals relative to the root */
-    intervals: Interval[];
+    intervals: Interval[]
     
     /** 
      * Chord symbol notation
      * @example "Cmaj7", "Dm9", "G7sus4"
      */
-    symbol: string;
+    symbol: string
 }

@@ -3,7 +3,7 @@ import type Note from "@/lib/types/note"
 /**
  * Valid key types in music theory.
  */
-export type KeyType = 'major' | 'minor';
+export type KeyType = 'major' | 'minor'
 
 /**
  * Represents a key signature in musical notation.
@@ -16,20 +16,20 @@ export type KeyType = 'major' | 'minor';
  *   accidentals: [],
  *   relativeKey: { ... },
  *   parallelKey: { ... }
- * };
+ * }
  */
 export default interface KeySignature {
     /** The tonic note of the key */
-    tonic: Note;
+    tonic: Note
     
     /** Whether the key is major or minor */
-    type: KeyType;
+    type: KeyType
     
     /** Number of sharps in the key signature */
-    sharps: number;
+    sharps: number
     
     /** Number of flats in the key signature */
-    flats: number;
+    flats: number
     
     /** 
      * Notes affected by the key signature
@@ -37,14 +37,14 @@ export default interface KeySignature {
      */
     accidentals: Array<{
         /** The note that is modified */
-        note: Note;
+        note: Note
         /** The accidental applied to the note */
-        accidental: 'b' | '#';
-    }>;
+        accidental: 'b' | '#'
+    }>
     
     /** The relative major/minor key */
-    relativeKey?: KeySignature;
+    relativeKey?: KeySignature
     
     /** The parallel major/minor key */
-    parallelKey?: KeySignature;
+    parallelKey?: KeySignature
 }
