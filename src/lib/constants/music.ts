@@ -52,4 +52,7 @@ export const MIDI_TO_NOTES: Record<number, Note[]> = {
         { letter: 'C', accidental: 'b' },
         { letter: 'A', accidental: '##' }
     ]
-};
+}
+
+export const CONCERT_PITCH = 440
+export const CONCERT_PITCH_MIDI = 69
