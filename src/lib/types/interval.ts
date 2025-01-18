@@ -38,7 +38,7 @@ export default interface Interval {
      * Frequency ratio of the interval
      * @example 3/2 for perfect fifth, 5/4 for major third
      */
-    ratio: number
+    ratio: string
     
     /** Quality of the interval */
     quality: IntervalQuality
