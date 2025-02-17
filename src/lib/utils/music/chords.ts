@@ -6,6 +6,102 @@ import { getIntervalBetweenNotes, createInterval } from "@/lib/utils/music/inter
 import { CHORD_INTERVALS, EXTENSION_INTERVALS } from "@/lib/constants/music"
 
 /**
+ * Generates chord symbol notation
+ */
+function generateChordSymbol(
+  root: Note,
+  quality: ChordQuality,
+  extension?: ChordExtension,
+  suspended?: number,
+  added?: number[]
+): string {
+  let symbol = root.letter
+
+  if (root.accidental) symbol += root.accidental === '#' ? '#' : 'b'
+
+  // Add quality
+  switch (quality) {
+    case 'minor':
+      symbol += 'm'
+      break
+    case 'diminished':
+      symbol += 'dim'
+      break
+    case 'augmented':
+      symbol += 'aug'
+      break
+    case 'half-diminished':
+      symbol += 'ø'
+      break
+    // Major and dominant don't need quality indicator
+  }
+
+  // Add suspension
+  if (suspended) symbol += `sus${suspended}`
+
+
+  // Add extension
+  if (extension) {
+    if (quality === 'major' && extension === '7') {
+      symbol += 'maj7'
+    } else {
+      symbol += extension
+    }
+  }
+
+  // Add additional notes
+  if (added && added.length > 0) symbol += `add${added.join(',')}`
+
+  return symbol
+}
+
+/**
+ * Identifies a chord from a collection of notes
+ */
+export function identifyChord(notes: Note[]): Chord | null {
+  if (notes.length < 3) return null
+
+  // Sort notes by pitch
+ notes.sort((a, b) => a.midiNumber - b.midiNumber)
+
+ // Try each note as potential root
+ for (const root of notes) {
+   const intervals = notes
+     .map((note) => getIntervalBetweenNotes(root, note))
+     .sort((a, b) => a.semitones - b.semitones)
+
+   // Extract semitone values
+   const semitoneValues = intervals.map((interval) => interval.semitones)
+
+   // Check against known chord patterns
+   for (const [quality, pattern] of Object.entries(CHORD_INTERVALS)) {
+     if (semitoneValues.join(",") === pattern.join(",")) {
+       const extension = identifyExtension(
+         semitoneValues,
+         quality as ChordQuality
+       )
+       return generateChord(root, quality as ChordQuality, { extension })
+     }
+   }
+ }
+
+ return null
+}
+
+/**
+ * Identifies chord extension from intervals
+ */
+function identifyExtension(intervals: number[], quality: ChordQuality): ChordExtension | undefined {
+  const maxInterval = Math.max(...intervals)
+
+  if (maxInterval >= EXTENSION_INTERVALS['13']) return '13'
+  if (maxInterval >= EXTENSION_INTERVALS['11']) return '11'
+  if (maxInterval >= EXTENSION_INTERVALS['9'])  return '9'
+  if (maxInterval >= EXTENSION_INTERVALS['7'][quality]) return '7'
+
+  return undefined
+}
+/**
  * Generates a chord based on root note, quality, and optional parameters
  */
 export function generateChord(
@@ -85,95 +181,4 @@ export function generateChord(
     ),
     symbol
   }
-}
-
-/**
- * Generates chord symbol notation
- */
-function generateChordSymbol(
-  root: Note,
-  quality: ChordQuality,
-  extension?: ChordExtension,
-  suspended?: number,
-  added?: number[]
-): string {
-  let symbol = root.letter
-
-  if (root.accidental) symbol += root.accidental === '#' ? '#' : 'b'
-
-  // Add quality
-  switch (quality) {
-    case 'minor':
-      symbol += 'm'
-      break
-    case 'diminished':
-      symbol += 'dim'
-      break
-    case 'augmented':
-      symbol += 'aug'
-      break
-    case 'half-diminished':
-      symbol += 'ø'
-      break
-    // Major and dominant don't need quality indicator
-  }
-
-  // Add suspension
-  if (suspended) symbol += `sus${suspended}`
-
-
-  // Add extension
-  if (extension) {
-    if (quality === 'major' && extension === '7') {
-      symbol += 'maj7'
-    } else {
-      symbol += extension
-    }
-  }
-
-  // Add additional notes
-  if (added && added.length > 0) symbol += `add${added.join(',')}`
-
-  return symbol
-}
-
-/**
- * Identifies a chord from a collection of notes
- */
-export function identifyChord(notes: Note[]): Chord | null {
-  if (notes.length < 3) return null
-
-  // Sort notes by pitch
-  notes.sort((a, b) => a.midiNumber - b.midiNumber)
-
-  // Try each note as potential root
-  for (const root of notes) {
-    const intervals = notes.map(note =>
-      getIntervalBetweenNotes(root, note) % 12
-    ).sort((a, b) => a - b)
-
-    // Check against known chord patterns
-    for (const [quality, pattern] of Object.entries(CHORD_INTERVALS)) {
-      if (intervals.join(',').startsWith(pattern.join(','))) {
-        const extension = identifyExtension(intervals, quality as ChordQuality)
-        return generateChord(root, quality as ChordQuality, { extension })
-      }
-    }
-  }
-
-  return null
-}
-
-/**
- * Identifies chord extension from intervals
- */
-function identifyExtension(intervals: number[], quality: ChordQuality): ChordExtension | undefined {
-  const maxInterval = Math.max(...intervals)
-
-  if (maxInterval >= EXTENSION_INTERVALS['13']) return '13'
-  if (maxInterval >= EXTENSION_INTERVALS['11']) return '11'
-  if (maxInterval >= EXTENSION_INTERVALS['9'])  return '9'
-  if (maxInterval >= EXTENSION_INTERVALS['7'][quality]) return '7'
-
-  return undefined
 }
