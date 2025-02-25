@@ -41,3 +41,8 @@ export function getMidiNoteInfo(midiNumber: number): Note {
     
     return enharmonics[0]
 }
+
+export function isBlackKey(note: Note): boolean {
+    const noteInOctave = note.midiNumber % 12;
+    return [1, 3, 6, 8, 10].includes(noteInOctave);
+}
