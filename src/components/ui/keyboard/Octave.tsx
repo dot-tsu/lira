@@ -14,7 +14,7 @@ const Octave = ({
   tonic = getMidiNoteInfo(12)
 }: OctaveProps) => {
   const chromaticScale = generateScale(tonic, 'chromatic')
-  console.log(chromaticScale)
+
   return (
       <div className="flex relative">
         {chromaticScale.notes.map((note: NoteType) => {
