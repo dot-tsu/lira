@@ -9,3 +9,7 @@ Pianero will be interactive web app that makes learning piano chords and scales 
 - React
 - Tailwind CSS
 - Shadcn/UI
+
+Progress:
+
+![{964FCAFB-293B-4D13-BCE3-432900745FCD}](https://github.com/user-attachments/assets/7ea993f1-ebeb-438f-bf9e-aa00680266ce)
