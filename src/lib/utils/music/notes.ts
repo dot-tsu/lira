@@ -14,7 +14,7 @@ function getMidiFrequency(midiNumber: number): number {
  */
 export function getMidiNoteInfo(midiNumber: number): Note {
     const pitchClass = midiNumber % 12
-    const octave = Math.floor(midiNumber / 12) - 1
+    const octave = Math.floor(midiNumber / 12) + 1
     const frequency = getMidiFrequency(midiNumber)
     
     const enharmonics: Note[] = MIDI_TO_NOTES[pitchClass].map(noteInfo => ({

@@ -2,7 +2,6 @@ import { generateScale } from '@/lib/utils/music/scales'
 import Note from './Note'
 import type NoteType from '@/lib/types/note'
 import { getMidiNoteInfo } from '@/lib/utils/music/notes'
-import DamperFelt from './DamperFelt'
 
 type OctaveProps = {
   activeNotes?: string[]
