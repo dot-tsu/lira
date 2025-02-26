@@ -1,20 +1,23 @@
 ---
 import '@/styles/globals.css'
-import Note from '@/components/ui/music/Note'
 import { getMidiNoteInfo } from '@/lib/utils/music/notes'
+import Octave from '@/components/ui/keyboard/Octave'
 
-const testNote = getMidiNoteInfo(69)
+const testNote = getMidiNoteInfo(1)
 
 console.log(testNote)
 ---
+
 <html>
   <body>
-    <h1>Hello, World!</h1>
-  <Note note={testNote} />
+    <div class="min-w-screen min-h-screen flex items-center justify-center">
+      <Octave />
+      <Octave />
+    </div>
   </body>
 </html>
 <style>
   h1 {
-    color: orange
+    color: orange;
   }
 </style>

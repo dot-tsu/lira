@@ -1,4 +1,4 @@
-import type Note from "@/lib/types/note"
+
 import type Interval from "../types/interval"
 
 // Define all possible spellings for each MIDI note number
@@ -66,7 +66,7 @@ export const INTERVAL_MAP: Record<number, Omit<Interval, "note">> = {
     shortName: "P1",
     number: 1,
     quality: "perfect",
-    ratio: 1,
+    ratio: "1",
     semitones: 0,
   },
   1: {
@@ -74,7 +74,7 @@ export const INTERVAL_MAP: Record<number, Omit<Interval, "note">> = {
     shortName: "m2",
     number: 2,
     quality: "minor",
-    ratio: 16 / 15,
+    ratio: "16/15",
     semitones: 1,
   },
   2: {
@@ -82,7 +82,7 @@ export const INTERVAL_MAP: Record<number, Omit<Interval, "note">> = {
     shortName: "M2",
     number: 2,
     quality: "major",
-    ratio: 9 / 8,
+    ratio: "9/8",
     semitones: 2,
   },
   3: {
@@ -90,7 +90,7 @@ export const INTERVAL_MAP: Record<number, Omit<Interval, "note">> = {
     shortName: "m3",
     number: 3,
     quality: "minor",
-    ratio: 6 / 5,
+    ratio: "6/5",
     semitones: 3,
   },
   4: {
@@ -98,7 +98,7 @@ export const INTERVAL_MAP: Record<number, Omit<Interval, "note">> = {
     shortName: "M3",
     number: 3,
     quality: "major",
-    ratio: 5 / 4,
+    ratio: "5/4",
     semitones: 4,
   },
   5: {
@@ -106,7 +106,7 @@ export const INTERVAL_MAP: Record<number, Omit<Interval, "note">> = {
     shortName: "P4",
     number: 4,
     quality: "perfect",
-    ratio: 4 / 3,
+    ratio: "4/3",
     semitones: 5,
   },
   6: {
@@ -114,7 +114,7 @@ export const INTERVAL_MAP: Record<number, Omit<Interval, "note">> = {
     shortName: "A4",
     number: 4,
     quality: "augmented",
-    ratio: 45 / 32,
+    ratio: "45/32",
     semitones: 6,
   },
   7: {
@@ -122,7 +122,7 @@ export const INTERVAL_MAP: Record<number, Omit<Interval, "note">> = {
     shortName: "P5",
     number: 5,
     quality: "perfect",
-    ratio: 3 / 2,
+    ratio: "3/2",
     semitones: 7,
   },
   8: {
@@ -130,7 +130,7 @@ export const INTERVAL_MAP: Record<number, Omit<Interval, "note">> = {
     shortName: "m6",
     number: 6,
     quality: "minor",
-    ratio: 8 / 5,
+    ratio: "8/5",
     semitones: 8,
   },
   9: {
@@ -138,7 +138,7 @@ export const INTERVAL_MAP: Record<number, Omit<Interval, "note">> = {
     shortName: "M6",
     number: 6,
     quality: "major",
-    ratio: 5 / 3,
+    ratio: "5/3",
     semitones: 9,
   },
   10: {
@@ -146,7 +146,7 @@ export const INTERVAL_MAP: Record<number, Omit<Interval, "note">> = {
     shortName: "m7",
     number: 7,
     quality: "minor",
-    ratio: 9 / 5,
+    ratio: "9/5",
     semitones: 10,
   },
   11: {
@@ -154,7 +154,7 @@ export const INTERVAL_MAP: Record<number, Omit<Interval, "note">> = {
     shortName: "M7",
     number: 7,
     quality: "major",
-    ratio: 15 / 8,
+    ratio: "15/8",
     semitones: 11,
   },
 } as const
