@@ -1,33 +1,31 @@
-import { generateScale } from "@/lib/utils/music/scales";
-import Note from "./Note";
-import type NoteType from "@/lib/types/note";
-import { getMidiNoteInfo } from "@/lib/utils/music/notes";
+import { generateScale } from '@/lib/utils/music/scales'
+import Note from './Note'
+import type NoteType from '@/lib/types/note'
+import { getMidiNoteInfo } from '@/lib/utils/music/notes'
+import DamperFelt from './DamperFelt'
 
 type OctaveProps = {
-  activeNotes?: string[];
-  tonic?: NoteType;
-};
+  activeNotes?: string[]
+  tonic?: NoteType
+}
 
-const Octave = ({ activeNotes = [], tonic = getMidiNoteInfo(12) }: OctaveProps) => {
-  const chromaticScale = generateScale(tonic, "chromatic");
+const Octave = ({
+  activeNotes = [],
+  tonic = getMidiNoteInfo(12)
+}: OctaveProps) => {
+  const chromaticScale = generateScale(tonic, 'chromatic')
   console.log(chromaticScale)
   return (
-    <div className="flex relative">
-      {chromaticScale.notes.map((note: NoteType) => {
-        const noteString = `${note.letter}${note.accidental ?? ""}`;
-        
-        const isActive = activeNotes.includes(noteString);
+      <div className="flex relative">
+        {chromaticScale.notes.map((note: NoteType) => {
+          const noteString = `${note.letter}${note.accidental ?? ''}`
 
-        return (
-          <Note
-            key={noteString}
-            note={note}
-            isActive={isActive}
-          />
-        );
-      })}
-    </div>
-  );
-};
+          const isActive = activeNotes.includes(noteString)
 
-export default Octave;
+          return <Note key={noteString} note={note} isActive={isActive} />
+        })}
+      </div>
+  )
+}
+
+export default Octave
