@@ -11,7 +11,7 @@ const Keyboard: React.FC<KeyboardProps> = ({ octaves = 2 }) => {
       <DamperFelt />
       <div className="flex items-center justify-center">
         {Array.from({ length: octaves }, (_, index) => (
-          <Octave key={index} tonic={getMidiNoteInfo(index * 12)} />
+          <Octave key={index} octaveNumber={index} />
         ))}
       </div>
     </div>
