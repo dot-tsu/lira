@@ -1,56 +1,63 @@
-import type NoteType from "@/lib/types/note";
-import { cn } from "@/lib/utils";
-import { isBlackKey } from "@/lib/utils/music/notes";
-import { cva } from "class-variance-authority";
+import type NoteType from '@/lib/types/note'
+import { isBlackKey } from '@/lib/utils/music/notes'
+import { cva } from 'class-variance-authority'
+
+const COLOR = 'red'
 
 const noteVariants = cva(
-  "flex items-center justify-center text-sm rounded-b-lg shadow-md",
+  'flex items-end justify-center rounded-b-lg shadow-md relative pb-3 duration-100 ease-in-out',
   {
     variants: {
-      variant: {
-        white: "bg-white text-black h-48 w-12",
-        black: "bg-black text-white h-32 w-8 -mx-4 z-10",
-        active: "TODO",
+      keyType: {
+        white:
+          'bg-white text-black h-48 w-12 hover:bg-gray-10 hover:shadow-lg',
+        black:
+          'bg-black text-white h-32 w-8 -mx-4 z-10 hover:bg-zinc-800 hover:text-zinc-100 hover:shadow-lg'
       },
+      isActive: {
+        true:  '',
+        false: ''
+      }
     },
+    compoundVariants: [
+      {
+        keyType: 'black',
+        isActive: true,
+        className: `!bg-${COLOR}-400 hover:!bg-${COLOR}-500 text-black`
+      },
+      {
+        keyType: 'white',
+        isActive: true,
+        className: `!bg-${COLOR}-200 hover:!bg-${COLOR}-300`
+      }
+    ],
     defaultVariants: {
-      variant: "white",
-    },
+      keyType: 'white',
+      isActive: false
+    }
   }
-);
+)
 
-const Note = ( {
+const Note = ({
   note,
-  isActive,
+  isActive = false,
   onClick,
 }: {
   note: NoteType
   isActive?: boolean
   onClick?: VoidFunction
-  } ) => {
-  const variant = isBlackKey(note) ? "black" : "white"
+}) => {
+  const keyType = isBlackKey(note) ? 'black' : 'white'
 
   return (
-    <button
-      onClick={onClick}
-      className={cn(
-      noteVariants({ variant: isActive ? 'active' : variant }),
-      'relative flex items-end justify-center pb-5',
-      'duration-100 ease-in-out hover:shadow-lg active:translate-y-1 active:shadow-md',
-      `${
-        isBlackKey(note) 
-        ? 'hover:bg-zinc-800 hover:text-zinc-100' 
-        : 'hover:bg-gray-100 hover:text-zinc-800'
-      }`
-      )}
-    >
-      {note.letter}
-      <small>{note.accidental}</small>
-      <span className="absolute bottom-2 text-xs text-gray-500">
-      {note.octave}
-      </span>
+    <button onClick={onClick} className={noteVariants({ keyType, isActive })}>
+      <span className='text-sm'>{note.letter}</span>
+      <small className='text-xs'>{note.accidental}</small>
+      {/* <span className='absolute bottom-2 text-xs text-gray-600'>
+        {note.octave}
+      </span> */}
     </button>
   )
-};
+}
 
-export default Note;
+export default Note
