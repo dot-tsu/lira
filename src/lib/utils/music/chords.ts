@@ -1,58 +1,67 @@
 import type Chord from "@/lib/types/chord"
 import type Note from "@/lib/types/note"
-import type { ChordQuality, ChordExtension } from "@/lib/types/chord"
+import type { ChordQuality, ChordExtension, ChordSymbolParts, ChordSymbol } from "@/lib/types/chord"
 import { getMidiNoteInfo } from "@/lib/utils/music/notes"
 import { getIntervalBetweenNotes, createInterval } from "@/lib/utils/music/intervals"
 import { CHORD_INTERVALS, EXTENSION_INTERVALS } from "@/lib/constants/music"
 
-/**
- * Generates chord symbol notation
- */
+
 function generateChordSymbol(
   root: Note,
   quality: ChordQuality,
   extension?: ChordExtension,
   suspended?: number,
   added?: number[]
-): string {
-  let symbol = root.letter
-
-  if (root.accidental) symbol += root.accidental === '#' ? '#' : 'b'
+): ChordSymbol {
+  const chordParts: ChordSymbolParts = {
+    root: root.letter + (root.accidental ? (root.accidental === '#' ? '#' : 'b') : '')
+  }
 
   // Add quality
   switch (quality) {
     case 'minor':
-      symbol += 'm'
+      chordParts.quality = 'm'
       break
     case 'diminished':
-      symbol += 'dim'
+      chordParts.quality = 'dim'
       break
     case 'augmented':
-      symbol += 'aug'
+      chordParts.quality = 'aug'
       break
     case 'half-diminished':
-      symbol += 'ø'
+      chordParts.quality = 'ø'
       break
     // Major and dominant don't need quality indicator
   }
 
   // Add suspension
-  if (suspended) symbol += `sus${suspended}`
-
+  if (suspended) {
+    chordParts.suspension = `sus${suspended}`
+  }
 
   // Add extension
   if (extension) {
-    if (quality === 'major' && extension === '7') {
-      symbol += 'maj7'
-    } else {
-      symbol += extension
-    }
+    chordParts.extension = quality === 'major' && extension === '7' ? 'maj7' : extension
   }
 
   // Add additional notes
-  if (added && added.length > 0) symbol += `add${added.join(',')}`
+  if (added && added.length > 0) {
+    chordParts.added = `add${added.join(',')}`
+  }
 
-  return symbol
+  // Combine all parts for the complete symbol
+  const chordSymbol = [
+    chordParts.root,
+    chordParts.quality,
+    chordParts.suspension,
+    chordParts.extension,
+    chordParts.added
+  ].filter(Boolean).join('')
+
+  return {
+    full: chordSymbol,
+    parts: chordParts
+  }
 }
 
 /**
@@ -166,7 +175,7 @@ export function generateChord(
   }
 
   // Generate symbol
-  const symbol = generateChordSymbol(root, quality, extension, suspended, added)
+  const {chordSymbol: symbol, chordParts: symbolParts} = generateChordSymbol(root, quality, extension, suspended, added)
 
   return {
     root,
@@ -179,6 +188,6 @@ export function generateChord(
     intervals: intervals.map(interval => 
       createInterval(interval)
     ),
-    symbol
+    symbol,
   }
 }

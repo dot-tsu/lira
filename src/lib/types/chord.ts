@@ -22,6 +22,22 @@ export type ChordQuality = 'major' | 'minor' | 'diminished' | 'augmented' | 'hal
 export type ChordExtension = '7' | '9' | '11' | '13'
 
 /**
+ * Represents the constituent parts of a chord symbol as strings.
+ */
+export type ChordSymbolParts = {
+  root: string
+  quality?: string
+  suspension?: string
+  extension?: string
+  added?: string
+}
+
+export type ChordSymbol = {
+  full: string
+  parts: ChordSymbolParts
+}
+
+/**
  * Represents a musical chord - three or more notes played together.
  * @example
  * const cMajor7: Chord = {
@@ -71,8 +87,24 @@ export default interface Chord {
     intervals: Interval[]
     
     /** 
-     * Chord symbol notation
-     * @example "Cmaj7", "Dm9", "G7sus4"
+     * Complete chord symbol representation containing:
+     * - full: The complete symbol as a string
+     * - parts: Deconstructed symbol components for analysis/manipulation
+     * @example 
+     * {
+     *   full: 'C7sus4',
+     *   parts: {
+     *     root: 'C',
+     *     quality: 'dominant',
+     *     suspension: 4,
+     *     extension: '7'
+     *   }
+     * }
      */
-    symbol: string
+    symbol: {
+        /** The complete chord symbol as a notation string */
+        full: string
+        /** Deconstructed chord symbol components */
+        parts: ChordSymbolParts
+    }
 }
