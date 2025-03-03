@@ -1,4 +1,4 @@
-import DamperFelt from './DamperFelt.astro'
+import DamperFelt from './DamperFelt'
 import Octave from './Octave'
 
 interface KeyboardProps {
