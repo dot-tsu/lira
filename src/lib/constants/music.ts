@@ -1,8 +1,9 @@
 
 import type Interval from "../types/interval"
+import type NoteType from "../types/note"
 
 // Define all possible spellings for each MIDI note number
-export const MIDI_TO_NOTES: Record<number, Note[]> = {
+export const MIDI_TO_NOTES: Record<number, NoteType[]> = {
   0: [
     { letter: "C", accidental: null, midiNumber: 0 },
     { letter: "B", accidental: "#", midiNumber: 0 },
@@ -56,8 +57,8 @@ export const MIDI_TO_NOTES: Record<number, Note[]> = {
 } as const
 
 // NOTES
-export const CONCERT_PITCH = 440 as const
-export const CONCERT_PITCH_MIDI = 69 as const
+export const CONCERT_PITCH = 440
+export const CONCERT_PITCH_MIDI = 69
 
 // INTERVALS
 export const INTERVAL_MAP: Record<number, Omit<Interval, "note">> = {

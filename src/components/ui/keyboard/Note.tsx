@@ -2,7 +2,7 @@ import type NoteType from '@/lib/types/note'
 import { isBlackKey } from '@/lib/utils/music/notes'
 import { cva } from 'class-variance-authority'
 
-const COLOR = 'red'
+const COLOR = 'orange'
 
 const noteVariants = cva(
   'flex items-end justify-center rounded-b-lg shadow-md relative pb-3 duration-100 ease-in-out',
@@ -10,9 +10,9 @@ const noteVariants = cva(
     variants: {
       keyType: {
         white:
-          'bg-white text-black h-48 w-12 hover:bg-gray-10 hover:shadow-lg',
+          'bg-white text-black h-48 w-12 hover:bg-stone-200 hover:shadow-lg',
         black:
-          'bg-black text-white h-32 w-8 -mx-4 z-10 hover:bg-zinc-800 hover:text-zinc-100 hover:shadow-lg'
+          'bg-black text-white h-32 w-8 -mx-4 z-10 hover:bg-zinc-700 hover:shadow-lg'
       },
       isActive: {
         true:  '',

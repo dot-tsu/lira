@@ -1,5 +1,6 @@
-import DamperFelt from './DamperFelt';
+import DamperFelt from './DamperFelt.astro'
 import Octave from './Octave'
+
 interface KeyboardProps {
   octaves?: number;
   activeMidiNotes?: number[]
