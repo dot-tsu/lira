@@ -1,5 +1,5 @@
-import type Interval from "@/lib/types/interval"
-import type Note from "@/lib/types/note"
+import type Interval from '@/lib/types/interval'
+import type Note from '@/lib/types/note'
 
 /**
  * Basic chord qualities available in music theory.
@@ -10,7 +10,13 @@ import type Note from "@/lib/types/note"
  * - half-diminished: Half-diminished seventh (1, ♭3, ♭5, ♭7)
  * - dominant: Dominant seventh (1, 3, 5, ♭7)
  */
-export type ChordQuality = 'major' | 'minor' | 'diminished' | 'augmented' | 'half-diminished' | 'dominant'
+export type ChordQuality =
+  | 'major'
+  | 'minor'
+  | 'diminished'
+  | 'augmented'
+  | 'half-diminished'
+  | 'dominant'
 
 /**
  * Available chord extensions beyond the basic triad.
@@ -50,61 +56,61 @@ export type ChordSymbol = {
  * }
  */
 export default interface Chord {
-    /** The root note of the chord */
-    root: Note
-    
-    /** Basic quality of the chord */
-    quality: ChordQuality
-    
-    /** Extension beyond the basic triad */
-    extension?: ChordExtension
-    
-    /** 
-     * Additional notes beyond the basic chord structure
-     * @example [9, 11, 13] for extended chords 
-     */
-    added?: number[]
-    
-    /** 
-     * Indicates if the chord is suspended
-     * @example 2 for sus2, 4 for sus4
-     */
-    suspended?: number
-    
-    /** 
-     * Inversion number:
-     * - 0: root position
-     * - 1: first inversion
-     * - 2: second inversion
-     * - 3: third inversion (seventh chords only)
-     */
-    inversion: number
-    
-    /** All notes in the chord, in order from lowest to highest */
-    notes: Note[]
-    
-    /** Intervals relative to the root */
-    intervals: Interval[]
-    
-    /** 
-     * Complete chord symbol representation containing:
-     * - full: The complete symbol as a string
-     * - parts: Deconstructed symbol components for analysis/manipulation
-     * @example 
-     * {
-     *   full: 'C7sus4',
-     *   parts: {
-     *     root: 'C',
-     *     quality: 'dominant',
-     *     suspension: 4,
-     *     extension: '7'
-     *   }
-     * }
-     */
-    symbol: {
-        /** The complete chord symbol as a notation string */
-        full: string
-        /** Deconstructed chord symbol components */
-        parts: ChordSymbolParts
-    }
+  /** The root note of the chord */
+  root: Note
+
+  /** Basic quality of the chord */
+  quality: ChordQuality
+
+  /** Extension beyond the basic triad */
+  extension?: ChordExtension
+
+  /**
+   * Additional notes beyond the basic chord structure
+   * @example [9, 11, 13] for extended chords
+   */
+  added?: number[]
+
+  /**
+   * Indicates if the chord is suspended
+   * @example 2 for sus2, 4 for sus4
+   */
+  suspended?: number
+
+  /**
+   * Inversion number:
+   * - 0: root position
+   * - 1: first inversion
+   * - 2: second inversion
+   * - 3: third inversion (seventh chords only)
+   */
+  inversion: number
+
+  /** All notes in the chord, in order from lowest to highest */
+  notes: Note[]
+
+  /** Intervals relative to the root */
+  intervals: Interval[]
+
+  /**
+   * Complete chord symbol representation containing:
+   * - full: The complete symbol as a string
+   * - parts: Deconstructed symbol components for analysis/manipulation
+   * @example
+   * {
+   *   full: 'C7sus4',
+   *   parts: {
+   *     root: 'C',
+   *     quality: 'dominant',
+   *     suspension: 4,
+   *     extension: '7'
+   *   }
+   * }
+   */
+  symbol: {
+    /** The complete chord symbol as a notation string */
+    full: string
+    /** Deconstructed chord symbol components */
+    parts: ChordSymbolParts
+  }
 }
