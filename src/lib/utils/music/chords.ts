@@ -21,50 +21,50 @@ function generateChordSymbol(
   added: number[] = []
 ): ChordSymbol {
   const parts: ChordSymbolParts = {
-    root: root.letter + (root.accidental ?? ''),
-  };
+    root: root.letter + (root.accidental ?? '')
+  }
 
-  let fullSymbol = parts.root;
+  let fullSymbol = parts.root
 
   switch (quality) {
     case 'minor':
-      parts.quality = 'm';
-      fullSymbol += 'm';
-      break;
+      parts.quality = 'm'
+      fullSymbol += 'm'
+      break
     case 'diminished':
-      parts.quality = 'dim';
-      fullSymbol += 'dim';
-      break;
+      parts.quality = 'dim'
+      fullSymbol += 'dim'
+      break
     case 'augmented':
-      parts.quality = 'aug';
-      fullSymbol += 'aug';
-      break;
+      parts.quality = 'aug'
+      fullSymbol += 'aug'
+      break
   }
 
   if (extension) {
-    const extNum = parseInt(extension, 10);
+    const extNum = parseInt(extension, 10)
     if (quality === 'major' && extNum >= 7) {
-      parts.extension = `maj${extension}`;
-      fullSymbol += `maj${extension}`;
+      parts.extension = `maj${extension}`
+      fullSymbol += `maj${extension}`
     } else {
-      parts.extension = extension;
-      fullSymbol += extension;
+      parts.extension = extension
+      fullSymbol += extension
     }
   }
 
   if (suspended) {
-    parts.suspension = `sus${suspended}`;
-    fullSymbol += `sus${suspended}`;
+    parts.suspension = `sus${suspended}`
+    fullSymbol += `sus${suspended}`
   }
 
-  const uniqueAdded = [...new Set(added)].sort((a, b) => a - b);
+  const uniqueAdded = [...new Set(added)].sort((a, b) => a - b)
   if (uniqueAdded.length > 0) {
-    const addedString = `add${uniqueAdded.join(',')}`;
-    parts.added = addedString;
-    fullSymbol += addedString;
+    const addedString = `add${uniqueAdded.join(',')}`
+    parts.added = addedString
+    fullSymbol += addedString
   }
 
-  return { full: fullSymbol, parts };
+  return { full: fullSymbol, parts }
 }
 
 /**
@@ -103,17 +103,19 @@ export function identifyChord(notes: Note[]): Chord | null {
 /**
  * Identifies chord extension from intervals
  */
-function identifyExtension(intervals: number[], quality: ChordQuality): ChordExtension | undefined {
-  const maxInterval = Math.max(...intervals);
+function identifyExtension(
+  intervals: number[],
+  quality: ChordQuality
+): ChordExtension | undefined {
+  const maxInterval = Math.max(...intervals)
 
-  if (maxInterval >= EXTENSION_INTERVALS['13']) return '13';
-  if (maxInterval >= EXTENSION_INTERVALS['11']) return '11';
-  if (maxInterval >= EXTENSION_INTERVALS['9']) return '9';
-  if (maxInterval >= EXTENSION_INTERVALS['7'][quality]) return '7';
+  if (maxInterval >= EXTENSION_INTERVALS['13']) return '13'
+  if (maxInterval >= EXTENSION_INTERVALS['11']) return '11'
+  if (maxInterval >= EXTENSION_INTERVALS['9']) return '9'
+  if (maxInterval >= EXTENSION_INTERVALS['7'][quality]) return '7'
 
-  return undefined;
+  return undefined
 }
-
 
 /**
  * Generates a chord based on root note, quality, and optional parameters
@@ -122,46 +124,50 @@ export function generateChord(
   root: Note,
   quality: ChordQuality,
   params: {
-    extension?: ChordExtension,
-    added?: number[],
-    suspended?: number,
+    extension?: ChordExtension
+    added?: number[]
+    suspended?: number
     inversion?: number
   } = {}
 ): Chord {
   // TODO: Fix types
-  const { extension, added = [], suspended, inversion = 0 } = params;
+  const { extension, added = [], suspended, inversion = 0 } = params
 
-  let intervals = [...CHORD_INTERVALS[quality]];
+  let intervals = [...CHORD_INTERVALS[quality]]
 
   if (suspended) {
-    intervals[1] = suspended === 2 ? 2 : 5;
+    intervals[1] = suspended === 2 ? 2 : 5
   }
 
   if (extension) {
-    const extNum = parseInt(extension, 10);
+    const extNum = parseInt(extension, 10)
     if (extNum >= 7) {
-      intervals.push(EXTENSION_INTERVALS['7'][quality]);
+      intervals.push(EXTENSION_INTERVALS['7'][quality])
     }
-    if (extNum >= 9) intervals.push(EXTENSION_INTERVALS['9']);
-    if (extNum >= 11) intervals.push(EXTENSION_INTERVALS['11']);
-    if (extNum >= 13) intervals.push(EXTENSION_INTERVALS['13']);
+    if (extNum >= 9) intervals.push(EXTENSION_INTERVALS['9'])
+    if (extNum >= 11) intervals.push(EXTENSION_INTERVALS['11'])
+    if (extNum >= 13) intervals.push(EXTENSION_INTERVALS['13'])
   }
 
-  intervals.push(...added);
-  intervals = [...new Set(intervals)].sort((a, b) => a - b);
+  intervals.push(...added)
+  intervals = [...new Set(intervals)].sort((a, b) => a - b)
 
-  let notes = intervals.map(interval => 
+  let notes = intervals.map((interval) =>
     getMidiNoteInfo(root.midiNumber + interval)
-  );
+  )
 
-  if (inversion > 0) {
-    const [head, tail] = [notes.slice(inversion), notes.slice(0, inversion)];
-    notes = [...head, ...tail.map(n => 
-      getMidiNoteInfo(n.midiNumber + 12)
-    )];
+  if (inversion > 0 && inversion < notes.length) {
+    const notesToInvert = notes.slice(0, inversion)
+    const remainingNotes = notes.slice(inversion)
+
+    const invertedNotes = notesToInvert.map(note => 
+      getMidiNoteInfo(note.midiNumber + 12)
+    )
+
+    notes = [...remainingNotes, ...invertedNotes]
   }
 
-  const symbol = generateChordSymbol(root, quality, extension, suspended, added);
+  const symbol = generateChordSymbol(root, quality, extension, suspended, added)
 
   return {
     root,
@@ -173,5 +179,22 @@ export function generateChord(
     notes,
     intervals: intervals.map(createInterval),
     symbol
-  };
+  }
+}
+
+export function getBassNote(chord: Chord): Note | null {
+  if (!chord.notes?.length || chord.inversion === 0) {
+    return null
+  }
+
+  const bassNote = chord.notes[0]
+  if (!bassNote) {
+    return null
+  }
+
+  if (bassNote.midiNumber === chord.root.midiNumber) {
+    return null
+  }
+
+  return bassNote
 }
