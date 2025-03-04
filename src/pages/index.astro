@@ -1,13 +1,21 @@
 ---
 import '@/styles/globals.css'
 import Keyboard from '@/components/ui/keyboard/Keyboard'
-
+import ChordInfo from '@/components/ui/chords/ChordInfo'
+import { generateChord } from '@/lib/utils/music/chords'
+import { getMidiNoteInfo } from '@/lib/utils/music/notes'
+const C1 = getMidiNoteInfo(0)
+const chord = generateChord(C1, 'dominant', {suspended: 2, added: [9], inversion: 1 }) 
+const chordMidiNotes = chord.notes.map((note) => note.midiNumber)
 ---
 
 <html>
   <body>
-    <div class="min-w-screen min-h-screen flex items-center justify-center">
-    <Keyboard />
+    <div
+      class='min-w-screen min-h-screen flex flex-col items-center gap-5 justify-center'
+    >
+      <ChordInfo chord={chord} />
+      <Keyboard activeMidiNotes={chordMidiNotes} />
     </div>
   </body>
 </html>

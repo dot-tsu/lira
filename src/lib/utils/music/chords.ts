@@ -39,6 +39,14 @@ function generateChordSymbol(
       parts.quality = 'aug'
       fullSymbol += 'aug'
       break
+    case 'half-diminished':
+      parts.quality = 'm7b5'
+      fullSymbol += 'm7b5'
+      break
+    case 'dominant':
+      parts.quality = '7'
+      fullSymbol += '7'
+      break
   }
 
   if (extension) {

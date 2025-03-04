@@ -6,7 +6,7 @@ interface KeyboardProps {
   activeMidiNotes?: number[]
 }
 
-const Keyboard: React.FC<KeyboardProps> = ( { octaves = 2, activeMidiNotes = [0, 3, 5, 6, 9, 11, 13, 15] } ) => {
+const Keyboard: React.FC<KeyboardProps> = ( { octaves = 2, activeMidiNotes = [] } ) => {
   return (
     <div>
       <DamperFelt />
