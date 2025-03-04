@@ -1,7 +1,7 @@
-import type ChordType from "@/lib/types/chord"
-import ChordName from "./chord/ChordName"
+import type ChordType from '@/lib/types/chord'
+import ChordName from './ChordName'
 
-const ChordInfo = ({chord}: {chord: ChordType}) => {
+const ChordInfo = ({ chord }: { chord: ChordType }) => {
   return (
     <>
       <ChordName chord={chord} />

@@ -1,21 +1,22 @@
 ---
 import '@/styles/globals.css'
 import Keyboard from '@/components/ui/keyboard/Keyboard'
-import ChordInfo from '@/components/ui/chords/ChordInfo'
+import ChordInfo from '@/components/ui/chords/ChordInfo/ChordInfo'
 import { generateChord } from '@/lib/utils/music/chords'
 import { getMidiNoteInfo } from '@/lib/utils/music/notes'
+import ChordSelector from '@/components/ui/chords/ChordSelector/ChordSelector'
+
 const C1 = getMidiNoteInfo(0)
-const chord = generateChord(C1, 'dominant', {suspended: 2, added: [9], inversion: 1 }) 
+const chord = generateChord(C1, 'major', { extension: '7' })
 const chordMidiNotes = chord.notes.map((note) => note.midiNumber)
 ---
 
 <html>
   <body>
-    <div
-      class='min-w-screen min-h-screen flex flex-col items-center gap-5 justify-center'
-    >
+    <div class='min-w-screen min-h-screen flex flex-col items-center gap-5'>
       <ChordInfo chord={chord} />
       <Keyboard activeMidiNotes={chordMidiNotes} />
+      <ChordSelector root={C1} onChordChange={(chord) => console.log(chord)} />
     </div>
   </body>
 </html>
