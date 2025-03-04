@@ -141,7 +141,7 @@ export function generateChord(
   // TODO: Fix types
   const { extension, added = [], suspended, inversion = 0 } = params
 
-  let intervals = [...CHORD_INTERVALS[quality]]
+  let intervals: number[] = [...CHORD_INTERVALS[quality]]
 
   if (suspended) {
     intervals[1] = suspended === 2 ? 2 : 5
@@ -157,7 +157,22 @@ export function generateChord(
     if (extNum >= 13) intervals.push(EXTENSION_INTERVALS['13'])
   }
 
-  intervals.push(...added)
+  added.forEach((add) => {
+    switch (add) {
+      case 9:
+        intervals.push(EXTENSION_INTERVALS['9'])
+        break
+      case 11:
+        intervals.push(EXTENSION_INTERVALS['11'])
+        break
+      case 13:
+        intervals.push(EXTENSION_INTERVALS['13'])
+        break
+      default:
+        intervals.push(add)
+    }
+  })
+
   intervals = [...new Set(intervals)].sort((a, b) => a - b)
 
   let notes = intervals.map((interval) =>
@@ -168,7 +183,7 @@ export function generateChord(
     const notesToInvert = notes.slice(0, inversion)
     const remainingNotes = notes.slice(inversion)
 
-    const invertedNotes = notesToInvert.map(note => 
+    const invertedNotes = notesToInvert.map((note) =>
       getMidiNoteInfo(note.midiNumber + 12)
     )
 
