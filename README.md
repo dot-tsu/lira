@@ -8,7 +8,6 @@ Lira will be interactive web app that makes learning chords and scales easy and 
 - Astro
 - React
 - Tailwind CSS
-- Shadcn/UI
 
 Progress:
 
