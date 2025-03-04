@@ -1,4 +1,5 @@
 
+import type { ChordQuality } from "../types/chord"
 import type Interval from "../types/interval"
 import type NoteType from "../types/note"
 
@@ -236,3 +237,41 @@ export const DIATONIC_CHORD_QUALITIES = {
     vii: { quality: "diminished" },
   },
 } as const
+
+
+export const CHORD_QUALITIES: Array<{ 
+  quality: ChordQuality
+  notation: string 
+  description: string 
+}> = [
+  { 
+  quality: 'major', 
+  notation: 'maj', 
+  description: 'Bright and clear.' 
+},
+{ 
+  quality: 'minor', 
+  notation: 'min', 
+  description: 'Soft and sad.' 
+},
+{ 
+  quality: 'diminished', 
+  notation: 'dim', 
+  description: 'Sharp and tense.' 
+},
+{ 
+  quality: 'augmented', 
+  notation: 'aug', 
+  description: 'Odd and unsettled.' 
+},
+{ 
+  quality: 'half-diminished', 
+  notation: 'm7♭5', 
+  description: 'Subtle and jazzy.' 
+},
+{ 
+  quality: 'dominant', 
+  notation: '7', 
+  description: 'Strong and bluesy.' 
+}
+] as const
