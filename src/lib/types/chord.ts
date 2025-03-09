@@ -10,13 +10,15 @@ import type Note from '@/lib/types/note'
  * - half-diminished: Half-diminished seventh (1, ♭3, ♭5, ♭7)
  * - dominant: Dominant seventh (1, 3, 5, ♭7)
  */
-export type ChordQuality =
-  | 'major'
-  | 'minor'
-  | 'diminished'
-  | 'augmented'
-  | 'half-diminished'
-  | 'dominant'
+
+export type ChordQuality = {
+  /** The basic quality name */
+  quality: 'major' | 'minor' | 'diminished' | 'augmented' | 'half-diminished' | 'dominant'
+  /** Standard notation symbol */
+  notation: 'maj' | 'm' | 'dim' | 'aug' | 'ø' | '7' | 'm7♭5' | null
+  /** Description of the chord structure */
+  description: string
+}
 
 /**
  * Available chord extensions beyond the basic triad.

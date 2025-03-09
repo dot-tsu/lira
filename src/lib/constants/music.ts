@@ -239,19 +239,15 @@ export const DIATONIC_CHORD_QUALITIES = {
 } as const
 
 
-export const CHORD_QUALITIES: Array<{ 
-  quality: ChordQuality
-  notation: string 
-  description: string 
-}> = [
+export const CHORD_QUALITIES: ChordQuality[] = [
   { 
   quality: 'major', 
-  notation: 'maj', 
+  notation: null, 
   description: 'Bright and clear.' 
 },
 { 
   quality: 'minor', 
-  notation: 'min', 
+  notation: 'm', 
   description: 'Soft and sad.' 
 },
 { 

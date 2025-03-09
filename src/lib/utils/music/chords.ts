@@ -11,7 +11,7 @@ import {
   getIntervalBetweenNotes,
   createInterval
 } from '@/lib/utils/music/intervals'
-import { CHORD_INTERVALS, EXTENSION_INTERVALS } from '@/lib/constants/music'
+import { CHORD_INTERVALS, CHORD_QUALITIES, EXTENSION_INTERVALS } from '@/lib/constants/music'
 
 function generateChordSymbol(
   root: Note,
@@ -26,32 +26,14 @@ function generateChordSymbol(
 
   let fullSymbol = parts.root
 
-  switch (quality) {
-    case 'minor':
-      parts.quality = 'm'
-      fullSymbol += 'm'
-      break
-    case 'diminished':
-      parts.quality = 'dim'
-      fullSymbol += 'dim'
-      break
-    case 'augmented':
-      parts.quality = 'aug'
-      fullSymbol += 'aug'
-      break
-    case 'half-diminished':
-      parts.quality = 'm7b5'
-      fullSymbol += 'm7b5'
-      break
-    case 'dominant':
-      parts.quality = '7'
-      fullSymbol += '7'
-      break
+  if (quality.notation) {
+    parts.quality = quality.notation
+    fullSymbol += quality.notation
   }
 
   if (extension) {
     const extNum = parseInt(extension, 10)
-    if (quality === 'major' && extNum >= 7) {
+    if (quality.quality === 'major' && extNum >= 7) {
       parts.extension = `maj${extension}`
       fullSymbol += `maj${extension}`
     } else {
@@ -94,13 +76,14 @@ export function identifyChord(notes: Note[]): Chord | null {
     const semitoneValues = intervals.map((interval) => interval.semitones)
 
     // Check against known chord patterns
-    for (const [quality, pattern] of Object.entries(CHORD_INTERVALS)) {
+    for (const chordQuality of CHORD_QUALITIES) {
+      const pattern = CHORD_INTERVALS[chordQuality.quality]
       if (semitoneValues.join(',') === pattern.join(',')) {
         const extension = identifyExtension(
           semitoneValues,
-          quality as ChordQuality
+          chordQuality
         )
-        return generateChord(root, quality as ChordQuality, { extension })
+        return generateChord(root, chordQuality, { extension })
       }
     }
   }
@@ -120,7 +103,7 @@ function identifyExtension(
   if (maxInterval >= EXTENSION_INTERVALS['13']) return '13'
   if (maxInterval >= EXTENSION_INTERVALS['11']) return '11'
   if (maxInterval >= EXTENSION_INTERVALS['9']) return '9'
-  if (maxInterval >= EXTENSION_INTERVALS['7'][quality]) return '7'
+  if (maxInterval >= EXTENSION_INTERVALS['7'][quality.quality]) return '7'
 
   return undefined
 }
@@ -138,10 +121,9 @@ export function generateChord(
     inversion?: number
   } = {}
 ): Chord {
-  // TODO: Fix types
   const { extension, added = [], suspended, inversion = 0 } = params
 
-  let intervals: number[] = [...CHORD_INTERVALS[quality]]
+  let intervals: number[] = [...CHORD_INTERVALS[quality.quality]]
 
   if (suspended) {
     intervals[1] = suspended === 2 ? 2 : 5
@@ -150,7 +132,7 @@ export function generateChord(
   if (extension) {
     const extNum = parseInt(extension, 10)
     if (extNum >= 7) {
-      intervals.push(EXTENSION_INTERVALS['7'][quality])
+      intervals.push(EXTENSION_INTERVALS['7'][quality.quality])
     }
     if (extNum >= 9) intervals.push(EXTENSION_INTERVALS['9'])
     if (extNum >= 11) intervals.push(EXTENSION_INTERVALS['11'])
