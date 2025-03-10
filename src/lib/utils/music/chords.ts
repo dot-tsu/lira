@@ -84,7 +84,7 @@ export function identifyChord(notes: Note[]): Chord | null {
           semitoneValues,
           chordQuality
         )
-        return generateChord(root, chordQuality, { extension })
+        return generateChord(root, chordQuality.quality, { extension })
       }
     }
   }

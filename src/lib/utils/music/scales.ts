@@ -4,8 +4,6 @@ import { getMidiNoteInfo } from "@/lib/utils/music/notes"
 import { generateChord } from "@/lib/utils/music/chords"
 import { arraysEqual } from "@/lib/utils"
 import { SCALE_PATTERNS, MODES, INTERVAL_MAP, DIATONIC_CHORD_QUALITIES, CHORD_QUALITIES } from "@/lib/constants/music"
-import type { ChordQuality } from "@/lib/types/chord"
-
 /**
  * Generates a scale based on tonic note and scale type
  */
@@ -51,7 +49,7 @@ export function findChordQualityByName ( qualityName: string ) {
 function generateDiatonicChords(
   scaleType: string,
   scaleNotes: Note[]
-): Scale['chords'] | undefined {
+): Scale['chords'] | null {
   // Only generate chords for scales with defined diatonic harmony
   if (!(scaleType in DIATONIC_CHORD_QUALITIES)) {
     return undefined
@@ -68,11 +66,11 @@ function generateDiatonicChords(
   const viQuality = findChordQualityByName(chordQualities.vi.quality)
   const viiQuality = findChordQualityByName(chordQualities.vii.quality)
   
-  // Make sure we found all quality objects
   if (!iQuality || !iiQuality || !iiiQuality || !ivQuality || !vQuality || !viQuality || !viiQuality) {
-    throw new Error(`Could not find all chord qualities for scale type: ${scaleType}`)
+    return null
   }
   
+  // TODO: Fix types
   return {
     i: generateChord(scaleNotes[0], iQuality),
     ii: generateChord(scaleNotes[1], iiQuality),
