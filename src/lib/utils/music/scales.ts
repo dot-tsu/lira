@@ -12,20 +12,20 @@ export function generateScale(
   scaleType: keyof typeof SCALE_PATTERNS,
   mode?: keyof typeof MODES
 ): Scale {
-  // Get the appropriate interval pattern
   let intervals = mode ? MODES[mode] : SCALE_PATTERNS[scaleType]
-  // Generate notes from intervals
+
   const notes = intervals.map(interval => {
     const midiNumber = tonic.midiNumber + interval
     return getMidiNoteInfo(midiNumber)
   })
-  // Generate scale intervals with proper musical names
+
   const scaleIntervals = intervals.map((interval, index) => ({
     ...INTERVAL_MAP[interval],
     note: notes[index]
   }))
-  // Generate diatonic chords if applicable
+
   const chords = generateDiatonicChords(scaleType, notes)
+  
   return {
     tonic,
     type: scaleType,
@@ -50,14 +50,12 @@ function generateDiatonicChords(
   scaleType: string,
   scaleNotes: Note[]
 ): Scale['chords'] | null {
-  // Only generate chords for scales with defined diatonic harmony
   if (!(scaleType in DIATONIC_CHORD_QUALITIES)) {
     return undefined
   }
   
   const chordQualities = DIATONIC_CHORD_QUALITIES[scaleType as keyof typeof DIATONIC_CHORD_QUALITIES]
   
-  // Find the matching ChordQuality objects from CHORD_QUALITIES
   const iQuality = findChordQualityByName(chordQualities.i.quality)
   const iiQuality = findChordQualityByName(chordQualities.ii.quality)
   const iiiQuality = findChordQualityByName(chordQualities.iii.quality)
@@ -102,11 +100,11 @@ export function getScaleModes(scale: Scale): Scale[] {
  * Identifies a scale from a collection of notes
  */
 export function identifyScale(notes: Note[]): Scale | null {
-  // Sort notes by pitch and normalize to single octave
+
   const normalizedIntervals = notes
     .map(note => note.midiNumber % 12)
     .sort((a, b) => a - b)
-  // Try to match against known scale patterns
+
   for (const [scaleType, pattern] of Object.entries(SCALE_PATTERNS)) {
     const normalizedPattern = pattern.map(interval => interval % 12)
     if (arraysEqual(normalizedIntervals, normalizedPattern)) {

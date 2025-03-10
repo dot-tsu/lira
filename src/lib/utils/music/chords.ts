@@ -64,19 +64,15 @@ function generateChordSymbol(
 export function identifyChord(notes: Note[]): Chord | null {
   if (notes.length < 3) return null
 
-  // Sort notes by pitch
   notes.sort((a, b) => a.midiNumber - b.midiNumber)
 
-  // Try each note as potential root
   for (const root of notes) {
     const intervals = notes
       .map((note) => getIntervalBetweenNotes(root, note))
       .sort((a, b) => a.semitones - b.semitones)
 
-    // Extract semitone values
     const semitoneValues = intervals.map((interval) => interval.semitones)
 
-    // Check against known chord patterns
     for (const chordQuality of CHORD_QUALITIES) {
       const pattern = CHORD_INTERVALS[chordQuality.quality]
       if (semitoneValues.join(',') === pattern.join(',')) {
