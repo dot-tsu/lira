@@ -163,12 +163,12 @@ export const INTERVAL_MAP: Record<number, Omit<Interval, "note">> = {
 
 // CHORDS
 export const CHORD_INTERVALS = {
-  major: [0, 4, 7],
-  minor: [0, 3, 7],
-  diminished: [0, 3, 6],
-  augmented: [0, 4, 8],
-  "half-diminished": [0, 3, 6, 10],
-  dominant: [0, 4, 7, 10],
+  'major': [0, 4, 7],
+  'minor': [0, 3, 7],
+  'diminished': [0, 3, 6],
+  'augmented': [0, 4, 8],
+  'half-diminished': [0, 3, 6, 10],
+  'dominant': [0, 4, 7, 10],
 } as const
 
 export const EXTENSION_INTERVALS = {

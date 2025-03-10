@@ -12,6 +12,7 @@ import {
   createInterval
 } from '@/lib/utils/music/intervals'
 import { CHORD_INTERVALS, CHORD_QUALITIES, EXTENSION_INTERVALS } from '@/lib/constants/music'
+import { findChordQualityByName } from './scales'
 
 function generateChordSymbol(
   root: Note,
@@ -113,18 +114,20 @@ function identifyExtension(
  */
 export function generateChord(
   root: Note,
-  quality: ChordQuality,
+  qualityName: ChordQuality['quality'],
   params: {
     extension?: ChordExtension
     added?: number[]
     suspended?: number
     inversion?: number
   } = {}
-): Chord {
+): Chord | null {
   const { extension, added = [], suspended, inversion = 0 } = params
-
-  let intervals: number[] = [...CHORD_INTERVALS[quality.quality]]
-
+  const quality = findChordQualityByName( qualityName )
+  
+  if (!quality || !root) return null
+  
+  let intervals: number[] = [...CHORD_INTERVALS[qualityName]]
   if (suspended) {
     intervals[1] = suspended === 2 ? 2 : 5
   }
@@ -132,7 +135,7 @@ export function generateChord(
   if (extension) {
     const extNum = parseInt(extension, 10)
     if (extNum >= 7) {
-      intervals.push(EXTENSION_INTERVALS['7'][quality.quality])
+      intervals.push(EXTENSION_INTERVALS['7'][qualityName])
     }
     if (extNum >= 9) intervals.push(EXTENSION_INTERVALS['9'])
     if (extNum >= 11) intervals.push(EXTENSION_INTERVALS['11'])
