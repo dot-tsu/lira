@@ -1,6 +1,6 @@
 # 🎹 Lira
 
-Lira will be interactive web app that makes learning piano chords and scales easy and visual.
+Lira will be interactive web app that makes learning chords and scales easy and visual.
 
 ## Tech Stack
 
@@ -8,7 +8,6 @@ Lira will be interactive web app that makes learning piano chords and scales eas
 - Astro
 - React
 - Tailwind CSS
-- Shadcn/UI
 
 Progress:
 
