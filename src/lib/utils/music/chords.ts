@@ -119,7 +119,7 @@ export function generateChord(
   } = {}
 ): Chord | null {
   const { extension, added = [], suspended, inversion = 0 } = params
-  const quality = findChordQualityByName( qualityName )
+  const quality = findChordQualityByName(qualityName)
   
   if (!quality || !root) return null
   

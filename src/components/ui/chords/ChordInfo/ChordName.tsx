@@ -1,8 +1,7 @@
+import { COLOR } from '@/lib/constants/ui'
 import type ChordType from '@/lib/types/chord'
 import type Note from '@/lib/types/note'
 import { getBassNote } from '@/lib/utils/music/chords'
-
-const COLOR = 'orange'
 
 const Root = ({ root }: { root: string }) => (
   <span className='text-5xl font-bold text-slate-900 tracking-tight leading-none'>

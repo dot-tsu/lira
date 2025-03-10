@@ -1,8 +1,7 @@
+import { COLOR } from '@/lib/constants/ui'
 import type NoteType from '@/lib/types/note'
 import { isBlackKey } from '@/lib/utils/music/notes'
 import { cva } from 'class-variance-authority'
-
-const COLOR = 'orange'
 
 const noteVariants = cva(
   'flex items-end justify-center rounded-b-lg shadow-md relative pb-3 duration-100 ease-in-out',
