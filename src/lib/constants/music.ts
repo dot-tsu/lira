@@ -173,12 +173,12 @@ export const CHORD_INTERVALS = {
 
 export const EXTENSION_INTERVALS = {
   "7": {
-    major: 11, // Major 7th
-    minor: 10, // Minor 7th
-    diminished: 9, // Diminished 7th
-    augmented: 11, // Major 7th
-    "half-diminished": 10, // Minor 7th
-    dominant: 10, // Minor 7th
+    Major: 11, // Major 7th
+    Minor: 10, // Minor 7th
+    Diminished: 9, // Diminished 7th
+    Augmented: 11, // Major 7th
+    "Half-diminished": 10, // Minor 7th
+    Dominant: 10, // Minor 7th
   },
   "9": 14, // Major 9th
   "11": 17, // Perfect 11th
@@ -210,31 +210,31 @@ export const MODES = {
 
 export const DIATONIC_CHORD_QUALITIES = {
   major: {
-    i: { quality: "major" },
-    ii: { quality: "minor" },
-    iii: { quality: "minor" },
-    iv: { quality: "major" },
-    v: { quality: "major", extension: "7" },
-    vi: { quality: "minor" },
-    vii: { quality: "diminished" },
+    i: { quality: "Major" },
+    ii: { quality: "Minor" },
+    iii: { quality: "Minor" },
+    iv: { quality: "Major" },
+    v: { quality: "Major", extension: "7" },
+    vi: { quality: "Minor" },
+    vii: { quality: "Diminished" },
   },
   "natural minor": {
-    i: { quality: "minor" },
-    ii: { quality: "diminished" },
-    iii: { quality: "major" },
-    iv: { quality: "minor" },
-    v: { quality: "minor" },
-    vi: { quality: "major" },
-    vii: { quality: "major" },
+    i: { quality: "Minor" },
+    ii: { quality: "Diminished" },
+    iii: { quality: "Major" },
+    iv: { quality: "Minor" },
+    v: { quality: "Minor" },
+    vi: { quality: "Major" },
+    vii: { quality: "Major" },
   },
   "harmonic minor": {
-    i: { quality: "minor" },
-    ii: { quality: "diminished" },
-    iii: { quality: "augmented" },
-    iv: { quality: "minor" },
-    v: { quality: "major", extension: "7" },
-    vi: { quality: "major" },
-    vii: { quality: "diminished" },
+    i: { quality: "Minor" },
+    ii: { quality: "Diminished" },
+    iii: { quality: "Augmented" },
+    iv: { quality: "Minor" },
+    v: { quality: "Major", extension: "7" },
+    vi: { quality: "Major" },
+    vii: { quality: "Diminished" },
   },
 } as const
 

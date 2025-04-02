@@ -1,9 +1,15 @@
-import type Scale from "@/lib/types/scale"
-import type Note from "@/lib/types/note"
-import { getMidiNoteInfo } from "@/lib/utils/music/notes"
-import { generateChord } from "@/lib/utils/music/chords"
-import { arraysEqual } from "@/lib/utils"
-import { SCALE_PATTERNS, MODES, INTERVAL_MAP, DIATONIC_CHORD_QUALITIES, CHORD_QUALITIES } from "@/lib/constants/music"
+import type Scale from '@/lib/types/scale'
+import type Note from '@/lib/types/note'
+import { getMidiNoteInfo } from '@/lib/utils/music/notes'
+import { generateChord } from '@/lib/utils/music/chords'
+import { arraysEqual } from '@/lib/utils'
+import {
+  SCALE_PATTERNS,
+  MODES,
+  INTERVAL_MAP,
+  DIATONIC_CHORD_QUALITIES,
+  CHORD_QUALITIES
+} from '@/lib/constants/music'
 /**
  * Generates a scale based on tonic note and scale type
  */
@@ -14,7 +20,7 @@ export function generateScale(
 ): Scale {
   let intervals = mode ? MODES[mode] : SCALE_PATTERNS[scaleType]
 
-  const notes = intervals.map(interval => {
+  const notes = intervals.map((interval) => {
     const midiNumber = tonic.midiNumber + interval
     return getMidiNoteInfo(midiNumber)
   })
@@ -25,7 +31,7 @@ export function generateScale(
   }))
 
   const chords = generateDiatonicChords(scaleType, notes)
-  
+
   return {
     tonic,
     type: scaleType,
@@ -39,8 +45,8 @@ export function generateScale(
 /**
  * Finds a ChordQuality object from the CHORD_QUALITIES array by quality name
  */
-export function findChordQualityByName ( qualityName: string ) {
-  return CHORD_QUALITIES.find(quality => quality.quality === qualityName)
+export function findChordQualityByName(qualityName: string) {
+  return CHORD_QUALITIES.find(({ quality }) => quality === qualityName)
 }
 
 /**
@@ -53,9 +59,10 @@ function generateDiatonicChords(
   if (!(scaleType in DIATONIC_CHORD_QUALITIES)) {
     return undefined
   }
-  
-  const chordQualities = DIATONIC_CHORD_QUALITIES[scaleType as keyof typeof DIATONIC_CHORD_QUALITIES]
-  
+
+  const chordQualities =
+    DIATONIC_CHORD_QUALITIES[scaleType as keyof typeof DIATONIC_CHORD_QUALITIES]
+
   const iQuality = findChordQualityByName(chordQualities.i.quality)
   const iiQuality = findChordQualityByName(chordQualities.ii.quality)
   const iiiQuality = findChordQualityByName(chordQualities.iii.quality)
@@ -63,11 +70,19 @@ function generateDiatonicChords(
   const vQuality = findChordQualityByName(chordQualities.v.quality)
   const viQuality = findChordQualityByName(chordQualities.vi.quality)
   const viiQuality = findChordQualityByName(chordQualities.vii.quality)
-  
-  if (!iQuality || !iiQuality || !iiiQuality || !ivQuality || !vQuality || !viQuality || !viiQuality) {
+
+  if (
+    !iQuality ||
+    !iiQuality ||
+    !iiiQuality ||
+    !ivQuality ||
+    !vQuality ||
+    !viQuality ||
+    !viiQuality
+  ) {
     return null
   }
-  
+
   // TODO: Fix types
   return {
     i: generateChord(scaleNotes[0], iQuality),
@@ -75,7 +90,10 @@ function generateDiatonicChords(
     iii: generateChord(scaleNotes[2], iiiQuality),
     iv: generateChord(scaleNotes[3], ivQuality),
     v: generateChord(scaleNotes[4], vQuality, {
-      extension: 'v' in chordQualities && 'extension' in chordQualities.v ? chordQualities.v.extension : undefined
+      extension:
+        'v' in chordQualities && 'extension' in chordQualities.v
+          ? chordQualities.v.extension
+          : undefined
     }),
     vi: generateChord(scaleNotes[5], viQuality),
     vii: generateChord(scaleNotes[6], viiQuality)
@@ -100,13 +118,12 @@ export function getScaleModes(scale: Scale): Scale[] {
  * Identifies a scale from a collection of notes
  */
 export function identifyScale(notes: Note[]): Scale | null {
-
   const normalizedIntervals = notes
-    .map(note => note.midiNumber % 12)
+    .map((note) => note.midiNumber % 12)
     .sort((a, b) => a - b)
 
   for (const [scaleType, pattern] of Object.entries(SCALE_PATTERNS)) {
-    const normalizedPattern = pattern.map(interval => interval % 12)
+    const normalizedPattern = pattern.map((interval) => interval % 12)
     if (arraysEqual(normalizedIntervals, normalizedPattern)) {
       return generateScale(notes[0], scaleType as keyof typeof SCALE_PATTERNS)
     }

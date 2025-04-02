@@ -34,7 +34,7 @@ function generateChordSymbol(
 
   if (extension) {
     const extNum = parseInt(extension, 10)
-    if (quality.quality === 'major' && extNum >= 7) {
+    if (quality.quality === 'Major' && extNum >= 7) {
       parts.extension = `maj${extension}`
       fullSymbol += `maj${extension}`
     } else {
@@ -117,11 +117,9 @@ export function generateChord(
     suspended?: number
     inversion?: number
   } = {}
-): Chord | null {
+): Chord {
   const { extension, added = [], suspended, inversion = 0 } = params
   const quality = findChordQualityByName(qualityName)
-  
-  if (!quality || !root) return null
   
   let intervals: number[] = [...CHORD_INTERVALS[qualityName]]
   if (suspended) {
