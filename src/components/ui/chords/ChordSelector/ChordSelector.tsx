@@ -1,27 +1,38 @@
 import type ChordType from '@/lib/types/chord'
-import type Note from '@/lib/types/note'
 import QualitySelect from './QualitySelect'
 import { generateChord } from '@/lib/utils/music/chords'
 
 const ChordSelector = ({
-  root,
-  onChordChange
+  chord,
+  onChange
 }: {
-  root: Note
-  onChordChange?: (chord: ChordType) => void
+  chord?: ChordType | null
+  onChange: (chord: ChordType) => void
 }) => {
-  const testChord = generateChord(root, 'dominant', { extension: '7' })
   return (
     <div className='space-y-8'>
       <QualitySelect
-        selectedQuality={testChord?.quality}
-        onChange={(quality) => {
-          console.log(quality)
+        value={chord?.quality}
+        onChange={(value) => {
+          const newChord = generateChord(chord.root, value.quality)
+          onChange(newChord)
         }}
       />
-      {/* <SuspensionSelect value={suspended} onChange={setSuspended} />
-      <ExtensionSelect value={extension} onChange={setExtension} />
-      <AddedNotesSelect values={added} onChange={setAdded} /> */}
+
+      {/* <SuspensionSelect
+        value={chord.suspended}
+        onChange={(suspension) => handleChange({ suspended: suspension })}
+      />
+
+      <ExtensionSelect
+        value={chord.extension}
+        onChange={(extension) => handleChange({ extension })}
+      />
+
+      <AddedNotesSelect
+        values={chord.added || []}
+        onChange={(added) => handleChange({ added })}
+      /> */}
     </div>
   )
 }

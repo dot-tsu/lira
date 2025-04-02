@@ -11,7 +11,7 @@ const MusicButton = ({
 }: {
   title: string
   label?: string
-  description: string
+  description?: string
   onClick: () => void
   active?: boolean
   disabled?: boolean
@@ -22,7 +22,7 @@ const MusicButton = ({
         'flex flex-col p-2 border border-slate-300 text-left rounded-lg',
         'transition-colors ease-in-out',
         {
-          [`hover:border-${COLOR}-500 hover:bg-${COLOR}-50`]: !disabled,
+          [`hover:!border-${COLOR}-500 hover:!bg-${COLOR}-50`]: !disabled,
           [`!border-${COLOR}-500 !bg-${COLOR}-50`]: active,
           'opacity-50 cursor-not-allowed': disabled
         }
@@ -36,7 +36,7 @@ const MusicButton = ({
           <span className={`font-medium !text-${COLOR}-500`}> ({label})</span> 
         )}
       </p>
-      <div className='text-sm text-slate-500'>{description}</div>
+      {description && <div className='text-sm text-slate-500'>{description}</div>}
     </button>
   )
 }

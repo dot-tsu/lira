@@ -13,7 +13,7 @@ import type Note from '@/lib/types/note'
 
 export type ChordQuality = {
   /** The basic quality name */
-  quality: 'major' | 'minor' | 'diminished' | 'augmented' | 'half-diminished' | 'dominant'
+  quality: 'Major' | 'Minor' | 'Diminished' | 'Augmented' | 'Half-diminished' | 'Dominant'
   /** Standard notation symbol */
   notation: 'maj' | 'm' | 'dim' | 'aug' | 'ø' | '7' | 'm7♭5' | null
   /** Description of the chord structure */

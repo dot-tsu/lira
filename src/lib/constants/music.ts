@@ -163,12 +163,12 @@ export const INTERVAL_MAP: Record<number, Omit<Interval, "note">> = {
 
 // CHORDS
 export const CHORD_INTERVALS = {
-  'major': [0, 4, 7],
-  'minor': [0, 3, 7],
-  'diminished': [0, 3, 6],
-  'augmented': [0, 4, 8],
-  'half-diminished': [0, 3, 6, 10],
-  'dominant': [0, 4, 7, 10],
+  'Major': [0, 4, 7],
+  'Minor': [0, 3, 7],
+  'Diminished': [0, 3, 6],
+  'Augmented': [0, 4, 8],
+  'Half-diminished': [0, 3, 6, 10],
+  'Dominant': [0, 4, 7, 10],
 } as const
 
 export const EXTENSION_INTERVALS = {
@@ -241,33 +241,56 @@ export const DIATONIC_CHORD_QUALITIES = {
 
 export const CHORD_QUALITIES: ChordQuality[] = [
   { 
-  quality: 'major', 
+  quality: 'Major', 
   notation: null, 
   description: 'Bright and clear.' 
 },
 { 
-  quality: 'minor', 
+  quality: 'Minor', 
   notation: 'm', 
   description: 'Soft and sad.' 
 },
 { 
-  quality: 'diminished', 
+  quality: 'Diminished', 
   notation: 'dim', 
   description: 'Sharp and tense.' 
 },
 { 
-  quality: 'augmented', 
+  quality: 'Augmented', 
   notation: 'aug', 
   description: 'Odd and unsettled.' 
 },
 { 
-  quality: 'half-diminished', 
+  quality: 'Half-diminished', 
   notation: 'm7♭5', 
   description: 'Subtle and jazzy.' 
 },
 { 
-  quality: 'dominant', 
+  quality: 'Dominant', 
   notation: '7', 
   description: 'Strong and bluesy.' 
 }
+] as const
+
+// Suspensions
+export const SUSPENSIONS = [
+  { value: 2, notation: 'sus2' },
+  { value: 4, notation: 'sus4' },
+] as const
+
+// Extensions
+export const EXTENSIONS = [
+  { extension: 'Dominant ninth', notation: '9' },
+  { extension: 'Dominant eleventh', notation: '11' },
+  { extension: 'Dominant thirteenth', notation: '13' },
+] as const
+
+// Added notes
+export const ADDED_NOTES = [
+  { value: 2, notation: 'add2'},
+  { value: 4, notation: 'add4' },
+  { value: 6, notation: 'add6' },
+  { value: 9, notation: 'add9' },
+  { value: 11, notation: 'add11' },
+  { value: 13, notation: 'add13' },
 ] as const
