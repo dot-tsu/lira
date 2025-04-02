@@ -7,10 +7,10 @@ import { generateChord } from '@/lib/utils/music/chords'
 import { getMidiNoteInfo } from '@/lib/utils/music/notes'
 
 const DEFAULT_ROOT = getMidiNoteInfo(0)
-const DEFAULT_CHORD = generateChord(DEFAULT_ROOT, 'Minor')
+const DEFAULT_CHORD = generateChord(DEFAULT_ROOT, 'Major')
 
 const ChordSelectorPage = () => {
-  const [chord, setChord] = useState<ChordType | null>(DEFAULT_CHORD)
+  const [chord, setChord] = useState<ChordType>(DEFAULT_CHORD)
 
   const activeMidiNotes = chord?.notes.map((note) => note.midiNumber) ?? []
 

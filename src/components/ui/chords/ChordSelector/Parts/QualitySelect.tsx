@@ -1,6 +1,6 @@
 import type { ChordQuality as Quality } from '@/lib/types/chord'
-import MusicButton from '../../MusicButton'
-import { CHORD_QUALITIES as QUALITIES } from '@/lib/constants/music'
+import MusicButton from '@/components/ui/MusicButton'
+import { QUALITIES as QUALITIES } from '@/lib/constants/music'
 
 const QualitySelect = ({
   value,

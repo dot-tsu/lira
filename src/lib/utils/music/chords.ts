@@ -11,7 +11,7 @@ import {
   getIntervalBetweenNotes,
   createInterval
 } from '@/lib/utils/music/intervals'
-import { CHORD_INTERVALS, CHORD_QUALITIES, EXTENSION_INTERVALS } from '@/lib/constants/music'
+import { INTERVALS, QUALITIES, EXTENSION_INTERVALS } from '@/lib/constants/music'
 import { findChordQualityByName } from './scales'
 
 function generateChordSymbol(
@@ -73,8 +73,8 @@ export function identifyChord(notes: Note[]): Chord | null {
 
     const semitoneValues = intervals.map((interval) => interval.semitones)
 
-    for (const chordQuality of CHORD_QUALITIES) {
-      const pattern = CHORD_INTERVALS[chordQuality.quality]
+    for (const chordQuality of QUALITIES) {
+      const pattern = INTERVALS[chordQuality.quality]
       if (semitoneValues.join(',') === pattern.join(',')) {
         const extension = identifyExtension(
           semitoneValues,
@@ -121,7 +121,7 @@ export function generateChord(
   const { extension, added = [], suspended, inversion = 0 } = params
   const quality = findChordQualityByName(qualityName)
   
-  let intervals: number[] = [...CHORD_INTERVALS[qualityName]]
+  let intervals: number[] = [...INTERVALS[qualityName]]
   if (suspended) {
     intervals[1] = suspended === 2 ? 2 : 5
   }

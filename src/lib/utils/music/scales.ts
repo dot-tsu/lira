@@ -7,8 +7,8 @@ import {
   SCALE_PATTERNS,
   MODES,
   INTERVAL_MAP,
-  DIATONIC_CHORD_QUALITIES,
-  CHORD_QUALITIES
+  DIATONIC_QUALITIES,
+  QUALITIES
 } from '@/lib/constants/music'
 /**
  * Generates a scale based on tonic note and scale type
@@ -43,10 +43,10 @@ export function generateScale(
 }
 
 /**
- * Finds a ChordQuality object from the CHORD_QUALITIES array by quality name
+ * Finds a ChordQuality object from the QUALITIES array by quality name
  */
 export function findChordQualityByName(qualityName: string) {
-  return CHORD_QUALITIES.find(({ quality }) => quality === qualityName)
+  return QUALITIES.find(({ quality }) => quality === qualityName)
 }
 
 /**
@@ -56,12 +56,12 @@ function generateDiatonicChords(
   scaleType: string,
   scaleNotes: Note[]
 ): Scale['chords'] | null {
-  if (!(scaleType in DIATONIC_CHORD_QUALITIES)) {
+  if (!(scaleType in DIATONIC_QUALITIES)) {
     return undefined
   }
 
   const chordQualities =
-    DIATONIC_CHORD_QUALITIES[scaleType as keyof typeof DIATONIC_CHORD_QUALITIES]
+    DIATONIC_QUALITIES[scaleType as keyof typeof DIATONIC_QUALITIES]
 
   const iQuality = findChordQualityByName(chordQualities.i.quality)
   const iiQuality = findChordQualityByName(chordQualities.ii.quality)

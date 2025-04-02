@@ -1,12 +1,13 @@
 import type ChordType from '@/lib/types/chord'
-import QualitySelect from './QualitySelect'
+
 import { generateChord } from '@/lib/utils/music/chords'
+import QualitySelect from './Parts/QualitySelect'
 
 const ChordSelector = ({
   chord,
   onChange
 }: {
-  chord?: ChordType | null
+  chord: ChordType
   onChange: (chord: ChordType) => void
 }) => {
   return (

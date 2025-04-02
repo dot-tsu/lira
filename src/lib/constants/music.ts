@@ -1,9 +1,11 @@
 
-import type { ChordQuality } from "../types/chord"
+import type { ChordExtension, ChordQuality } from "../types/chord"
 import type Interval from "../types/interval"
 import type NoteType from "../types/note"
 
-// Define all possible spellings for each MIDI note number
+export const CONCERT_PITCH = 440
+export const CONCERT_PITCH_MIDI = 69
+
 export const MIDI_TO_NOTES: Record<number, NoteType[]> = {
   0: [
     { letter: "C", accidental: null, midiNumber: 0 },
@@ -57,11 +59,6 @@ export const MIDI_TO_NOTES: Record<number, NoteType[]> = {
   ],
 } as const
 
-// NOTES
-export const CONCERT_PITCH = 440
-export const CONCERT_PITCH_MIDI = 69
-
-// INTERVALS
 export const INTERVAL_MAP: Record<number, Omit<Interval, "note">> = {
   0: {
     name: "Perfect Unison",
@@ -161,8 +158,7 @@ export const INTERVAL_MAP: Record<number, Omit<Interval, "note">> = {
   },
 } as const
 
-// CHORDS
-export const CHORD_INTERVALS = {
+export const INTERVALS = {
   'Major': [0, 4, 7],
   'Minor': [0, 3, 7],
   'Diminished': [0, 3, 6],
@@ -185,7 +181,6 @@ export const EXTENSION_INTERVALS = {
   "13": 21, // Major 13th
 } as const
 
-// SCALES
 export const SCALE_PATTERNS = {
   major: [0, 2, 4, 5, 7, 9, 11],
   "natural minor": [0, 2, 3, 5, 7, 8, 10],
@@ -197,7 +192,6 @@ export const SCALE_PATTERNS = {
   chromatic: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
 } as const
 
-// Modal names for the major scale
 export const MODES = {
   ionian: SCALE_PATTERNS.major,
   dorian: [0, 2, 3, 5, 7, 9, 10],
@@ -208,7 +202,7 @@ export const MODES = {
   locrian: [0, 1, 3, 5, 6, 8, 10],
 } as const
 
-export const DIATONIC_CHORD_QUALITIES = {
+export const DIATONIC_QUALITIES = {
   major: {
     i: { quality: "Major" },
     ii: { quality: "Minor" },
@@ -239,58 +233,48 @@ export const DIATONIC_CHORD_QUALITIES = {
 } as const
 
 
-export const CHORD_QUALITIES: ChordQuality[] = [
-  { 
-  quality: 'Major', 
-  notation: null, 
-  description: 'Bright and clear.' 
-},
-{ 
-  quality: 'Minor', 
-  notation: 'm', 
-  description: 'Soft and sad.' 
-},
-{ 
-  quality: 'Diminished', 
-  notation: 'dim', 
-  description: 'Sharp and tense.' 
-},
-{ 
-  quality: 'Augmented', 
-  notation: 'aug', 
-  description: 'Odd and unsettled.' 
-},
-{ 
-  quality: 'Half-diminished', 
-  notation: 'm7♭5', 
-  description: 'Subtle and jazzy.' 
-},
-{ 
-  quality: 'Dominant', 
-  notation: '7', 
-  description: 'Strong and bluesy.' 
+export const QUALITIES: ReadonlyArray<ChordQuality> = [
+  { quality: 'Major', notation: null, description: 'Bright and clear.' },
+  { quality: 'Minor', notation: 'm', description: 'Soft and sad.' },
+  { quality: 'Diminished', notation: 'dim', description: 'Sharp and tense.' },
+  { quality: 'Augmented', notation: 'aug', description: 'Odd and unsettled.' },
+  { quality: 'Half-diminished', notation: 'm7♭5', description: 'Subtle and jazzy.' },
+  { quality: 'Dominant', notation: '7', description: 'Strong and bluesy.' }
+] as const
+
+export type SuspensionOption = {
+  value: number
+  notation: string
+  description: string
 }
+
+export const SUSPENSIONS: ReadonlyArray<SuspensionOption> = [
+  { value: 2, notation: 'sus2', description: 'Replaces the 3rd with the 2nd' },
+  { value: 4, notation: 'sus4', description: 'Replaces the 3rd with the 4th' },
 ] as const
 
-// Suspensions
-export const SUSPENSIONS = [
-  { value: 2, notation: 'sus2' },
-  { value: 4, notation: 'sus4' },
+export type ExtensionOption = {
+  value: ChordExtension
+  notation: string
+  description: string
+}
+
+export const EXTENSIONS: ReadonlyArray<ExtensionOption> = [
+  { value: '7', notation: '7', description: 'Adds the 7th' },
+  { value: '9', notation: '9', description: 'Adds the 7th and 9th' },
+  { value: '11', notation: '11', description: 'Adds the 7th, 9th, and 11th' },
+  { value: '13', notation: '13', description: 'Adds the 7th, 9th, 11th, and 13th' },
 ] as const
 
-// Extensions
-export const EXTENSIONS = [
-  { extension: 'Dominant ninth', notation: '9' },
-  { extension: 'Dominant eleventh', notation: '11' },
-  { extension: 'Dominant thirteenth', notation: '13' },
-] as const
+export type AddedNoteOption = {
+  value: number // The interval number (e.g., 6, 9, 11)
+  notation: string // e.g., 'add6', 'add9'
+  description: string
+}
 
-// Added notes
-export const ADDED_NOTES = [
-  { value: 2, notation: 'add2'},
-  { value: 4, notation: 'add4' },
-  { value: 6, notation: 'add6' },
-  { value: 9, notation: 'add9' },
-  { value: 11, notation: 'add11' },
-  { value: 13, notation: 'add13' },
+export const ADDED_NOTES: ReadonlyArray<AddedNoteOption> = [
+  { value: 9, notation: 'add9', description: 'Adds the 9th (without the 7th)' },
+  { value: 11, notation: 'add11', description: 'Adds the 11th (without the 7th/9th)' },
+  { value: 13, notation: 'add13', description: 'Adds the 13th (without the 7th/9th/11th)' },
+  { value: 6, notation: 'add6', description: 'Adds the 6th' },
 ] as const
