@@ -1,18 +1,19 @@
 import MusicButton from '@/components/ui/MusicButton'
-import { SUSPENSIONS } from '@/lib/constants/music'
+import { EXTENSIONS } from '@/lib/constants/music'
+import type { ChordExtension } from '@/lib/types/chord'
 
-const SuspensionSelect = ({
+const ExtensionSelect = ({
   value,
   onChange
 }: {
-  value?: number
-  onChange: (suspension: number | null) => void
+  value?: ChordExtension
+  onChange: (extension: ChordExtension | null) => void
 }) => {
   return (
     <div>
       <div className='flex gap-2 flex-wrap'>
-        {SUSPENSIONS.map((suspensionOption) => {
-          const { value: optionValue, notation, description } = suspensionOption
+        {EXTENSIONS.map((extensionOption) => {
+          const { value: optionValue, notation, description } = extensionOption
           const isActive = value === optionValue
 
           return (
@@ -33,4 +34,4 @@ const SuspensionSelect = ({
   )
 }
 
-export default SuspensionSelect
+export default ExtensionSelect
