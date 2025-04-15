@@ -5,20 +5,21 @@ import { useState } from 'react'
 import type ChordType from '@/lib/types/chord'
 import { generateChord } from '@/lib/utils/music/chords'
 import { getMidiNoteInfo } from '@/lib/utils/music/notes'
+import type NoteType from '@/lib/types/note'
 
 const DEFAULT_ROOT = getMidiNoteInfo(0)
-const DEFAULT_CHORD = generateChord(DEFAULT_ROOT, 'Major')
 
 const ChordSelectorPage = () => {
+  const [root, setRoot] = useState<NoteType>(DEFAULT_ROOT)
+  const DEFAULT_CHORD = generateChord(root, 'Major')
   const [chord, setChord] = useState<ChordType>(DEFAULT_CHORD)
-
   const activeMidiNotes = chord?.notes.map((note) => note.midiNumber) ?? []
 
   return (
     <div className='min-w-screen min-h-screen flex flex-col items-center gap-5 p-4'>
       <ChordInfo chord={chord} />
-      <Keyboard activeMidiNotes={activeMidiNotes} />
-      <ChordSelector chord={chord} onChange={setChord} />
+      <Keyboard activeMidiNotes={activeMidiNotes} onClickNote={setRoot} />
+      <ChordSelector chord={chord} onChange={setChord} root={root} />
     </div>
   )
 }

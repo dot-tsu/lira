@@ -4,15 +4,23 @@ import SuspensionSelect from './Parts/SuspensionSelect'
 import ExtensionSelect from './Parts/ExtensionSelect'
 import AddedNotesSelect from './Parts/AddedNotesSelect'
 import withUpdateChord from '@/hocs/withUpdateChord'
+import type NoteType from '@/lib/types/note'
+import { useEffect } from 'react'
 
 const ChordSelector = ({
   chord,
-  updateChord
+  updateChord,
+  root
 }: {
   chord: ChordType
+  root: NoteType
   // TODO: Add types
   updateChord: (updates: any) => void
 }) => {
+  useEffect(() => {
+    if (chord.root.midiNumber === root.midiNumber) return
+    updateChord({ root })
+  }, [root, updateChord, chord.root.midiNumber])
   return (
     <div className='space-y-6'>
       <div>

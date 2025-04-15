@@ -14,7 +14,7 @@ const noteVariants = cva(
           'bg-black text-white h-32 w-8 -mx-4 z-10 hover:bg-zinc-700 hover:shadow-lg'
       },
       isActive: {
-        true:  '',
+        true: '',
         false: ''
       }
     },
@@ -40,7 +40,7 @@ const noteVariants = cva(
 const Note = ({
   note,
   isActive = false,
-  onClick,
+  onClick
 }: {
   note: NoteType
   isActive?: boolean
@@ -49,7 +49,10 @@ const Note = ({
   const keyType = isBlackKey(note) ? 'black' : 'white'
 
   return (
-    <button onClick={onClick} className={noteVariants({ keyType, isActive })}>
+    <button
+      onClick={() => onClick(note)}
+      className={noteVariants({ keyType, isActive })}
+    >
       <span className='text-sm'>{note.letter}</span>
       <small className='text-xs'>{note.accidental}</small>
       {/* <span className='absolute bottom-2 text-xs text-gray-600'>
