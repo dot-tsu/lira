@@ -249,8 +249,8 @@ export type SuspensionOption = {
 }
 
 export const SUSPENSIONS: ReadonlyArray<SuspensionOption> = [
-  { value: 2, notation: 'sus2', description: 'Replaces the 3rd with the 2nd' },
-  { value: 4, notation: 'sus4', description: 'Replaces the 3rd with the 4th' },
+  { value: 2, notation: 'sus2', description: 'Open and airy.' },
+  { value: 4, notation: 'sus4', description: 'Tense and unresolved.' },
 ] as const
 
 export type ExtensionOption = {
@@ -260,10 +260,10 @@ export type ExtensionOption = {
 }
 
 export const EXTENSIONS: ReadonlyArray<ExtensionOption> = [
-  { value: '7', notation: '7', description: 'Adds the 7th' },
-  { value: '9', notation: '9', description: 'Adds the 7th and 9th' },
-  { value: '11', notation: '11', description: 'Adds the 7th, 9th, and 11th' },
-  { value: '13', notation: '13', description: 'Adds the 7th, 9th, 11th, and 13th' },
+  { value: '7', notation: '7', description: 'Bluesy and grounded.' },
+  { value: '9', notation: '9', description: 'Colorful and smooth.' },
+  { value: '11', notation: '11', description: 'Rich and atmospheric.' },
+  { value: '13', notation: '13', description: 'Lush and jazzy.' },
 ] as const
 
 export type AddedNoteOption = {
@@ -273,8 +273,8 @@ export type AddedNoteOption = {
 }
 
 export const ADDED_NOTES: ReadonlyArray<AddedNoteOption> = [
-  { value: 9, notation: 'add9', description: 'Adds the 9th (without the 7th)' },
-  { value: 11, notation: 'add11', description: 'Adds the 11th (without the 7th/9th)' },
-  { value: 13, notation: 'add13', description: 'Adds the 13th (without the 7th/9th/11th)' },
-  { value: 6, notation: 'add6', description: 'Adds the 6th' },
+  { value: 9, notation: 'add9', description: 'Bright and elegant.' },
+  { value: 11, notation: 'add11', description: 'Dreamy and modern.' },
+  { value: 13, notation: 'add13', description: 'Warm and colorful.' },
+  { value: 6, notation: 'add6', description: 'Sweet and vintage.' },
 ] as const

@@ -31,7 +31,7 @@ const AddedNotesSelect = ({
           return (
             <MusicButton
               key={optionValue}
-              title={description}
+              title={optionValue.toString()}
               label={notation}
               description={description}
               active={isActive}
