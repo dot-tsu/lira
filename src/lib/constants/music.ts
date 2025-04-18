@@ -238,7 +238,7 @@ export const QUALITIES: ReadonlyArray<ChordQuality> = [
   { quality: 'Minor', notation: 'm', description: 'Soft and sad.' },
   { quality: 'Diminished', notation: 'dim', description: 'Sharp and tense.' },
   { quality: 'Augmented', notation: 'aug', description: 'Odd and unsettled.' },
-  { quality: 'Half-diminished', notation: 'm7♭5', description: 'Subtle and jazzy.' },
+  { quality: 'Half-diminished', notation: 'm7b5', description: 'Subtle and jazzy.' },
   { quality: 'Dominant', notation: '7', description: 'Strong and bluesy.' }
 ] as const
 

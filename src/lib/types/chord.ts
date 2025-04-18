@@ -15,7 +15,7 @@ export type ChordQuality = {
   /** The basic quality name */
   quality: 'Major' | 'Minor' | 'Diminished' | 'Augmented' | 'Half-diminished' | 'Dominant'
   /** Standard notation symbol */
-  notation: 'maj' | 'm' | 'dim' | 'aug' | 'ø' | '7' | 'm7♭5' | null
+  notation: 'maj' | 'm' | 'dim' | 'aug' | 'ø' | '7' | 'm7b5' | null
   /** Description of the chord structure */
   description: string
 }
