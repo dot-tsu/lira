@@ -20,6 +20,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'heading': ['Rethink Sans Variable', 'sans-serif'],
+        'text': ['Nunito Variable', 'sans-serif'],
+      },
       keyframes: {
         'accordion-down': {
           from: { height: '0' },

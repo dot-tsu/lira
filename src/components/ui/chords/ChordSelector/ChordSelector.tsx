@@ -18,7 +18,9 @@ const ChordSelectorSection = ({
   isArray = false
 }: any) => (
   <div>
-    <h3 className='text-sm font-medium mb-2 text-gray-600'>{title}</h3>
+    <h3 className='text-xs mb-2 text-neutral-600 font-heading uppercase tracking-widest'>
+      {title}
+    </h3>
     <Component
       value={value}
       values={isArray ? value : undefined}

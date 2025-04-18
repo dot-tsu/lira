@@ -52,7 +52,7 @@ const ChordName = ({ chord }: { chord: ChordType }) => {
   const bassNote = getBassNote(chord)
 
   return (
-    <div className='inline-flex items-baseline group hover:opacity-90 transition-opacity'>
+    <div className='font-heading inline-flex items-baseline group hover:opacity-90 transition-opacity'>
       <Root root={root} />
       {quality && <Quality quality={quality} />}
       {extension && <Extension extension={extension} />}

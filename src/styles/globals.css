@@ -1,3 +1,10 @@
+@import '@fontsource-variable/rethink-sans';
+@import '@fontsource-variable/nunito';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.no-ligatures {
+  font-variant-ligatures: none;
+}
