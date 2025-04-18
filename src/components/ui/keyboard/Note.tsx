@@ -4,14 +4,14 @@ import { isBlackKey } from '@/lib/utils/music/notes'
 import { cva } from 'class-variance-authority'
 
 const noteVariants = cva(
-  'flex items-end justify-center rounded-b-lg shadow-md relative pb-3 duration-100 ease-in-out',
+  'flex items-end justify-center rounded-b-lg shadow-md relative pb-4 duration-100 ease-in-out',
   {
     variants: {
       keyType: {
         white:
-          'bg-white text-black h-48 w-12 hover:bg-stone-200 hover:shadow-lg',
+          'bg-white text-black h-64 w-16 hover:bg-stone-200 hover:shadow-lg',
         black:
-          'bg-black text-white h-32 w-8 -mx-4 z-10 hover:bg-zinc-700 hover:shadow-lg'
+          'bg-black text-white h-44 w-10 -mx-5 z-10 hover:bg-zinc-700 hover:shadow-lg'
       },
       isActive: {
         true: '',
@@ -47,15 +47,14 @@ const Note = ({
   onClick?: VoidFunction
 }) => {
   const keyType = isBlackKey(note) ? 'black' : 'white'
-
   return (
     <button
       onClick={() => onClick(note)}
       className={noteVariants({ keyType, isActive })}
     >
-      <span className='text-sm'>{note.letter}</span>
-      <small className='text-xs'>{note.accidental}</small>
-      {/* <span className='absolute bottom-2 text-xs text-gray-600'>
+      <span className='text-base'>{note.letter}</span>
+      <small className='text-sm'>{note.accidental}</small>
+      {/* <span className='absolute bottom-3 text-sm text-gray-600'>
         {note.octave}
       </span> */}
     </button>

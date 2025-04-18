@@ -4,13 +4,15 @@ import type Note from '@/lib/types/note'
 import { getBassNote } from '@/lib/utils/music/chords'
 
 const Root = ({ root }: { root: string }) => (
-  <span className='text-5xl font-bold text-neutral-900 tracking-tight leading-none'>
+  <span
+    className={`text-6xl font-bold text-orange-500 tracking-tight leading-none`}
+  >
     {root}
   </span>
 )
 
 const Quality = ({ quality }: { quality: string }) => (
-  <span className={`text-4xl font-semibold text-${COLOR}-400 leading-none`}>
+  <span className={`text-4xl font-semibold text-neutral-700 leading-none`}>
     {quality}
   </span>
 )
@@ -23,7 +25,7 @@ const Extension = ({ extension }: { extension: string }) => (
 
 const Added = ({ added }: { added: string }) => (
   <span
-    className={`text-2xl text-${COLOR}-400 font-medium ml-0.5 relative top-px leading-none`}
+    className={`text-2xl text-${COLOR}-500 font-medium ml-0.5 relative top-px leading-none`}
   >
     {added}
   </span>
