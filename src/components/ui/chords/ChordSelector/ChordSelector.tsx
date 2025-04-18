@@ -6,6 +6,26 @@ import AddedNotesSelect from './Parts/AddedNotesSelect'
 import withUpdateChord from '@/hocs/withUpdateChord'
 import type NoteType from '@/lib/types/note'
 import { useEffect } from 'react'
+import Separator from '../../Separator'
+
+const ChordSelectorSection = ({
+  title,
+  property,
+  component: Component,
+  updateChord,
+  value,
+
+  isArray = false
+}: any) => (
+  <div>
+    <h3 className='text-sm font-medium mb-2 text-gray-600'>{title}</h3>
+    <Component
+      value={value}
+      values={isArray ? value : undefined}
+      onChange={(newValue: any) => updateChord({ [property]: newValue })}
+    />
+  </div>
+)
 
 const ChordSelector = ({
   chord,
@@ -14,51 +34,49 @@ const ChordSelector = ({
 }: {
   chord: ChordType
   root: NoteType
-  // TODO: Add types
   updateChord: (updates: any) => void
 }) => {
   useEffect(() => {
     if (chord.root.midiNumber === root.midiNumber) return
     updateChord({ root })
   }, [root, updateChord, chord.root.midiNumber])
+
   return (
     <div className='space-y-6'>
-      <div>
-        <h3 className='text-sm font-medium mb-2 text-gray-600'>Quality</h3>
-        <QualitySelect
-          value={chord?.quality}
-          onChange={(newQuality) => {
-            updateChord({ quality: newQuality })
-          }}
-        />
-      </div>
-      <div>
-        <h3 className='text-sm font-medium mb-2 text-gray-600'>Suspension</h3>
-        <SuspensionSelect
+      <ChordSelectorSection
+        title='Quality'
+        property='quality'
+        component={QualitySelect}
+        updateChord={updateChord}
+        value={chord?.quality}
+      />
+
+      <div className='flex'>
+        <ChordSelectorSection
+          title='Suspension'
+          property='suspended'
+          component={SuspensionSelect}
+          updateChord={updateChord}
           value={chord?.suspended}
-          onChange={(suspension) => {
-            updateChord({ suspended: suspension })
-          }}
+        />
+        <Separator />
+        <ChordSelectorSection
+          title='Added notes'
+          property='added'
+          component={AddedNotesSelect}
+          updateChord={updateChord}
+          value={chord?.added || []}
+          isArray={true}
         />
       </div>
-      <div>
-        <h3 className='text-sm font-medium mb-2 text-gray-600'>Extension</h3>
-        <ExtensionSelect
-          value={chord?.extension}
-          onChange={(extension) => {
-            updateChord({ extension: extension })
-          }}
-        />
-      </div>
-      <div>
-        <h3 className='text-sm font-medium mb-2 text-gray-600'>Added Notes</h3>
-        <AddedNotesSelect
-          values={chord?.added || []}
-          onChange={(added) => {
-            updateChord({ added: added })
-          }}
-        />
-      </div>
+
+      <ChordSelectorSection
+        title='Extension'
+        property='extension'
+        component={ExtensionSelect}
+        updateChord={updateChord}
+        value={chord?.extension}
+      />
     </div>
   )
 }

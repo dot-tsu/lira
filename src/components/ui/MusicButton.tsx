@@ -19,7 +19,7 @@ const MusicButton = ({
   return (
     <button
       className={cn(
-        'flex flex-col p-2 border border-slate-300 text-left rounded-lg',
+        'flex flex-col p-2 border border-neutral-300 text-left rounded-lg',
         'transition-colors ease-in-out',
         {
           [`hover:!border-${COLOR}-500 hover:!bg-${COLOR}-50`]: !disabled,
@@ -33,10 +33,12 @@ const MusicButton = ({
       <p className='text-md font-bold -mt-1'>
         {title}
         {label && (
-          <span className={`font-medium !text-${COLOR}-500`}> ({label})</span> 
+          <span className={`font-medium !text-${COLOR}-500`}> ({label})</span>
         )}
       </p>
-      {description && <div className='text-sm text-slate-500'>{description}</div>}
+      {description && (
+        <div className='text-sm text-neutral-500'>{description}</div>
+      )}
     </button>
   )
 }

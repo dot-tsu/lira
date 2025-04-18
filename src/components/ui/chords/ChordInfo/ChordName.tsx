@@ -4,7 +4,7 @@ import type Note from '@/lib/types/note'
 import { getBassNote } from '@/lib/utils/music/chords'
 
 const Root = ({ root }: { root: string }) => (
-  <span className='text-5xl font-bold text-slate-900 tracking-tight leading-none'>
+  <span className='text-5xl font-bold text-neutral-900 tracking-tight leading-none'>
     {root}
   </span>
 )
@@ -16,7 +16,7 @@ const Quality = ({ quality }: { quality: string }) => (
 )
 
 const Extension = ({ extension }: { extension: string }) => (
-  <span className='text-2xl text-slate-500 font-medium ml-0.5 relative top-px leading-none'>
+  <span className='text-2xl text-neutral-500 font-medium ml-0.5 relative top-px leading-none'>
     {extension}
   </span>
 )
@@ -30,7 +30,7 @@ const Added = ({ added }: { added: string }) => (
 )
 
 const Suspension = ({ suspension }: { suspension: string }) => (
-  <span className='text-2xl text-slate-500 font-medium ml-0.5 relative top-px leading-none'>
+  <span className='text-2xl text-neutral-500 font-medium ml-0.5 relative top-px leading-none'>
     {suspension}
   </span>
 )
@@ -39,7 +39,7 @@ const Bass = ({ bassNote }: { bassNote: Note | null }) => {
   if (!bassNote) return null
 
   return (
-    <span className='text-3xl text-slate-600 font-semibold ml-1 leading-none'>
+    <span className='text-3xl text-neutral-600 font-semibold ml-1 leading-none'>
       /{bassNote.letter + (bassNote.accidental ?? '')}
     </span>
   )
