@@ -273,8 +273,9 @@ export type AddedNoteOption = {
 }
 
 export const ADDED_NOTES: ReadonlyArray<AddedNoteOption> = [
+  { value: 6, notation: 'add6', description: 'Sweet and vintage' },
   { value: 9, notation: 'add9', description: 'Bright and elegant' },
   { value: 11, notation: 'add11', description: 'Dreamy and modern' },
   { value: 13, notation: 'add13', description: 'Warm and colorful' },
-  { value: 6, notation: 'add6', description: 'Sweet and vintage' },
+
 ] as const

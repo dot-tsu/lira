@@ -73,23 +73,23 @@ const ChordSelector = ({
           disabled={uiValidationState.disableSuspensionSelect}
         />
         <Separator />
+
         <ChordSelectorSection
-          title='Added notes'
-          property='added'
-          component={AddedNotesSelect}
+          title='Extension'
+          property='extension'
+          component={ExtensionSelect}
           updateChord={updateChord}
-          values={chord?.added || []}
-          disabledValues={uiValidationState.disabledAddedNoteValues}
+          value={chord?.extension}
+          disabledValues={uiValidationState.disabledExtensionValues}
         />
       </div>
-
       <ChordSelectorSection
-        title='Extension'
-        property='extension'
-        component={ExtensionSelect}
+        title='Added notes'
+        property='added'
+        component={AddedNotesSelect}
         updateChord={updateChord}
-        value={chord?.extension}
-        disabledValues={uiValidationState.disabledExtensionValues}
+        values={chord?.added || []}
+        disabledValues={uiValidationState.disabledAddedNoteValues}
       />
     </div>
   )
