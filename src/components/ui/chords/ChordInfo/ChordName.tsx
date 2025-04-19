@@ -5,7 +5,7 @@ import { getBassNote } from '@/lib/utils/music/chords'
 
 const Root = ({ root }: { root: string }) => (
   <span
-    className={`text-6xl font-bold text-orange-500 tracking-tight leading-none`}
+    className={`text-6xl font-bold text-${COLOR}-500 tracking-tight leading-none`}
   >
     {root}
   </span>

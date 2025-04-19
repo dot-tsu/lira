@@ -16,7 +16,7 @@ const ChordSelectorPage = () => {
   const activeMidiNotes = chord?.notes.map((note) => note.midiNumber) ?? []
 
   return (
-    <div className='min-w-screen min-h-screen flex flex-col items-center gap-5 p-4'>
+    <div className='min-w-screen min-h-screen flex flex-col items-center -mt-14 justify-center gap-6 p-4'>
       <ChordInfo chord={chord} />
       <Keyboard activeMidiNotes={activeMidiNotes} onClickNote={setRoot} />
       <ChordSelector chord={chord} onChange={setChord} root={root} />
