@@ -3,10 +3,12 @@ import { SUSPENSIONS } from '@/lib/constants/music'
 
 const SuspensionSelect = ({
   value,
-  onChange
+  onChange,
+  disabled
 }: {
   value?: number
   onChange: (suspension: number | null) => void
+  disabled: boolean
 }) => {
   return (
     <div>
@@ -25,6 +27,7 @@ const SuspensionSelect = ({
               onClick={() => {
                 onChange(isActive ? null : optionValue)
               }}
+              disabled={disabled}
             />
           )
         })}

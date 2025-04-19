@@ -4,10 +4,12 @@ import type { ChordExtension } from '@/lib/types/chord'
 
 const ExtensionSelect = ({
   value,
-  onChange
+  onChange,
+  disabledValues
 }: {
   value?: ChordExtension
   onChange: (extension: ChordExtension | null) => void
+  disabledValues: string[]
 }) => {
   return (
     <div>
@@ -26,6 +28,7 @@ const ExtensionSelect = ({
               onClick={() => {
                 onChange(isActive ? null : optionValue)
               }}
+              disabled={disabledValues.includes(optionValue)}
             />
           )
         })}

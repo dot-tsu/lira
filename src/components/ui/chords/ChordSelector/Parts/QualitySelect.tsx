@@ -1,13 +1,15 @@
 import type { ChordQuality as Quality } from '@/lib/types/chord'
 import MusicButton from '@/components/ui/MusicButton'
-import { QUALITIES as QUALITIES } from '@/lib/constants/music'
+import { QUALITIES } from '@/lib/constants/music'
 
 const QualitySelect = ({
   value,
-  onChange
+  onChange,
+  disabled
 }: {
   value?: Quality
   onChange: (quality: Quality) => void
+  disabled: boolean
 }) => {
   return (
     <div className='flex gap-2'>
@@ -23,6 +25,7 @@ const QualitySelect = ({
             onClick={() => {
               onChange(rawQuality)
             }}
+            disabled={disabled}
           />
         )
       })}

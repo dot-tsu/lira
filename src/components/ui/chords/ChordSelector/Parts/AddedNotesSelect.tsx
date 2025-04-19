@@ -3,10 +3,12 @@ import { ADDED_NOTES } from '@/lib/constants/music'
 
 const AddedNotesSelect = ({
   values,
-  onChange
+  onChange,
+  disabledValues
 }: {
   values: number[]
   onChange: (added: number[]) => void
+  disabledValues: number[]
 }) => {
   const handleToggleNote = (noteValue: number) => {
     const currentIndex = values.indexOf(noteValue)
@@ -38,6 +40,7 @@ const AddedNotesSelect = ({
               onClick={() => {
                 handleToggleNote(optionValue)
               }}
+              disabled={disabledValues.includes(optionValue)}
             />
           )
         })}

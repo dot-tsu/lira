@@ -5,8 +5,9 @@ import ExtensionSelect from './Parts/ExtensionSelect'
 import AddedNotesSelect from './Parts/AddedNotesSelect'
 import withUpdateChord from '@/hocs/withUpdateChord'
 import type NoteType from '@/lib/types/note'
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import Separator from '../../Separator'
+import { getChordUIValidationState } from '@/lib/utils/music/chordValidation' // Importar la utilidad
 
 const ChordSelectorSection = ({
   title,
@@ -14,8 +15,9 @@ const ChordSelectorSection = ({
   component: Component,
   updateChord,
   value,
-
-  isArray = false
+  values,
+  disabled,
+  disabledValues
 }: any) => (
   <div>
     <h3 className='text-xs mb-2 text-neutral-600 font-heading uppercase tracking-widest'>
@@ -23,8 +25,10 @@ const ChordSelectorSection = ({
     </h3>
     <Component
       value={value}
-      values={isArray ? value : undefined}
+      values={values}
       onChange={(newValue: any) => updateChord({ [property]: newValue })}
+      disabled={disabled}
+      disabledValues={disabledValues}
     />
   </div>
 )
@@ -43,6 +47,11 @@ const ChordSelector = ({
     updateChord({ root })
   }, [root, updateChord, chord.root.midiNumber])
 
+  const uiValidationState = useMemo(
+    () => getChordUIValidationState(chord),
+    [chord.quality, chord.suspended]
+  )
+
   return (
     <div className='space-y-6'>
       <ChordSelectorSection
@@ -51,6 +60,7 @@ const ChordSelector = ({
         component={QualitySelect}
         updateChord={updateChord}
         value={chord?.quality}
+        disabled={uiValidationState.disableQualitySelect}
       />
 
       <div className='flex'>
@@ -60,6 +70,7 @@ const ChordSelector = ({
           component={SuspensionSelect}
           updateChord={updateChord}
           value={chord?.suspended}
+          disabled={uiValidationState.disableSuspensionSelect}
         />
         <Separator />
         <ChordSelectorSection
@@ -67,8 +78,8 @@ const ChordSelector = ({
           property='added'
           component={AddedNotesSelect}
           updateChord={updateChord}
-          value={chord?.added || []}
-          isArray={true}
+          values={chord?.added || []}
+          disabledValues={uiValidationState.disabledAddedNoteValues}
         />
       </div>
 
@@ -78,6 +89,7 @@ const ChordSelector = ({
         component={ExtensionSelect}
         updateChord={updateChord}
         value={chord?.extension}
+        disabledValues={uiValidationState.disabledExtensionValues}
       />
     </div>
   )
