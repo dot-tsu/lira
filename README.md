@@ -9,7 +9,7 @@ Lira will be interactive web app that makes learning chords and scales easy and 
 - React
 - Tailwind CSS
 
-Progress:
-For now, I've only created the chord generator feature.
-![{6F2A71E5-205A-49E9-9E64-DF4199EB2406}](https://github.com/user-attachments/assets/642548b0-3e36-4c63-9532-a7dad2044a51)
+Preview:
+![{15D24AD6-150D-4CD6-9757-18CCDDED9960}](https://github.com/user-attachments/assets/94fdfd10-31db-43a0-8813-63f6a713b9a6)
+
 
