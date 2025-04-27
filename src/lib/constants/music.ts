@@ -294,7 +294,7 @@ export const CHORD_DESCRIPTIONS: ReadonlyArray<ChordDescription> = [
   },
   {
     quality: 'Minor',
-    description: 'A melancholic chord that adds emotional depth to music. Commonly used to express sadness and create rich, somber harmonies.'
+    description: 'A melancholic chord that adds emotional depth. Commonly used to express sadness.'
   },
   {
     quality: 'Diminished',
