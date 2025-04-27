@@ -9,9 +9,9 @@ const noteVariants = cva(
     variants: {
       keyType: {
         white:
-          'bg-white text-black h-24 lg:h-64 w-[18%]  hover:bg-stone-200 hover:shadow-lg landscape:h-48',
+          'bg-white text-black h-24 md:h-64 w-[18%] hover:bg-stone-200 hover:shadow-lg',
         black:
-          'bg-black text-white h-16 lg:h-44 w-[12%] -mx-[5%] z-10 hover:bg-zinc-700 hover:shadow-lg landscape:h-32'
+          'bg-black text-white h-16 md:h-44 w-[12%] -mx-[5%] z-10 hover:bg-zinc-700 hover:shadow-lg'
       },
       isActive: {
         true: '',
