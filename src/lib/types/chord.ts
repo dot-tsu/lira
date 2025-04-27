@@ -115,4 +115,7 @@ export default interface Chord {
     /** Deconstructed chord symbol components */
     parts: ChordSymbolParts
   }
+
+  /** Description of the chord's character and usage */
+  description?: string
 }

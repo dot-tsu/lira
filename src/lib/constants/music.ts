@@ -1,4 +1,3 @@
-
 import type { ChordExtension, ChordQuality } from "../types/chord"
 import type Interval from "../types/interval"
 import type NoteType from "../types/note"
@@ -278,4 +277,90 @@ export const ADDED_NOTES: ReadonlyArray<AddedNoteOption> = [
   { value: 11, notation: 'add11', description: 'Dreamy and modern' },
   { value: 13, notation: 'add13', description: 'Warm and colorful' },
 
+] as const
+
+export type ChordDescription = {
+  quality: ChordQuality['quality']
+  extension?: ChordExtension
+  added?: number
+  suspended?: number
+  description: string
+}
+
+export const CHORD_DESCRIPTIONS: ReadonlyArray<ChordDescription> = [
+  {
+    quality: 'Major',
+    description: 'A bright, stable chord that forms the foundation of most music. Often used to create uplifting melodies and harmonies.'
+  },
+  {
+    quality: 'Minor',
+    description: 'A melancholic chord that adds emotional depth to music. Commonly used to express sadness and create rich, somber harmonies.'
+  },
+  {
+    quality: 'Diminished',
+    description: 'A tense, mysterious chord that creates suspense. Often used to add drama or transition between other chords.'
+  },
+  {
+    quality: 'Augmented',
+    description: 'A unique, dreamy chord that adds color to your music. Perfect for creating an otherworldly atmosphere.'
+  },
+  {
+    quality: 'Half-diminished',
+    description: 'A sophisticated chord that adds a jazzy flavor. Great for creating rich, complex harmonies.'
+  },
+  {
+    quality: 'Dominant',
+    description: 'A powerful chord that drives music forward. Essential for creating tension and resolution in progressions.'
+  },
+  {
+    quality: 'Major',
+    extension: '9',
+    description: 'A rich, colorful chord that adds sophistication. Popular in jazz and R&B for its smooth sound.'
+  },
+  {
+    quality: 'Major',
+    extension: '11',
+    description: 'A dreamy chord that creates atmosphere. Great for adding depth to your harmonies.'
+  },
+  {
+    quality: 'Major',
+    extension: '13',
+    description: 'A lush, full chord that brings warmth and richness. Perfect for creating rich, complex harmonies.'
+  },
+  {
+    quality: 'Major',
+    added: 6,
+    description: 'A sweet, nostalgic chord that adds warmth. Popular in pop and jazz for its vintage feel.'
+  },
+  {
+    quality: 'Major',
+    added: 9,
+    description: 'A bright, fresh chord that adds sparkle. Great for creating modern, uplifting sounds.'
+  },
+  {
+    quality: 'Major',
+    added: 11,
+    description: 'A dreamy chord that adds atmosphere. Perfect for creating ethereal, floating sounds.'
+  },
+  {
+    quality: 'Major',
+    added: 13,
+    description: 'A warm, colorful chord that adds richness. Great for creating full, satisfying harmonies.'
+  },
+  {
+    quality: 'Major',
+    suspended: 2,
+    description: 'An open, airy chord that creates space. Perfect for folk and pop music.'
+  },
+  {
+    quality: 'Major',
+    suspended: 4,
+    description: 'A floating chord that creates anticipation. Great for building tension in your music.'
+  },
+  {
+    quality: 'Dominant',
+    extension: '7',
+    suspended: 4,
+    description: 'A floating, bluesy chord that combines tension with movement. Perfect for jazz and R&B.'
+  }
 ] as const

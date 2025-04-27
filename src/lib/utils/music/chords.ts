@@ -11,7 +11,7 @@ import {
   getIntervalBetweenNotes,
   createInterval
 } from '@/lib/utils/music/intervals'
-import { INTERVALS, QUALITIES, EXTENSION_INTERVALS } from '@/lib/constants/music'
+import { INTERVALS, QUALITIES, EXTENSION_INTERVALS, CHORD_DESCRIPTIONS } from '@/lib/constants/music'
 import { findChordQualityByName } from './scales'
 
 function generateChordSymbol(
@@ -48,7 +48,10 @@ function generateChordSymbol(
     fullSymbol += `sus${suspended}`
   }
 
-  const uniqueAdded = [...new Set(added)].sort((a, b) => a - b)
+  const uniqueAdded = added
+    .filter((value, index, self) => self.indexOf(value) === index)
+    .sort((a, b) => a - b);
+
   if (uniqueAdded.length > 0) {
     const addedString = `add${uniqueAdded.join(',')}`
     parts.added = addedString
@@ -105,6 +108,32 @@ function identifyExtension(
   return undefined
 }
 
+function findChordDescription(
+  qualityName: ChordQuality['quality'],
+  extension?: ChordExtension,
+  added: number[] = [],
+  suspended?: number
+): string | undefined {
+  const matchesQuality = (desc: typeof CHORD_DESCRIPTIONS[number]) =>
+    desc.quality === qualityName
+
+  const matchesExtension = (desc: typeof CHORD_DESCRIPTIONS[number]) =>
+    desc.extension === extension
+
+  const matchesAdded = (desc: typeof CHORD_DESCRIPTIONS[number]) =>
+    !desc.added || (added.length === 1 && desc.added === added[0])
+
+  const matchesSuspended = (desc: typeof CHORD_DESCRIPTIONS[number]) =>
+    desc.suspended === suspended
+
+  return CHORD_DESCRIPTIONS.find(desc =>
+    matchesQuality(desc) &&
+    matchesExtension(desc) &&
+    matchesAdded(desc) &&
+    matchesSuspended(desc)
+  )?.description
+}
+
 /**
  * Generates a chord based on root note, quality, and optional parameters
  */
@@ -120,7 +149,11 @@ export function generateChord(
 ): Chord {
   const { extension, added = [], suspended, inversion = 0 } = params
   const quality = findChordQualityByName(qualityName)
-  
+
+  if (!quality) {
+    throw new Error(`Invalid chord quality: ${qualityName}`)
+  }
+
   let intervals: number[] = [...INTERVALS[qualityName]]
   if (suspended) {
     intervals[1] = suspended === 2 ? 2 : 5
@@ -170,6 +203,7 @@ export function generateChord(
   }
 
   const symbol = generateChordSymbol(root, quality, extension, suspended, added)
+  const description = findChordDescription(qualityName, extension, added, suspended)
 
   return {
     root,
@@ -180,7 +214,8 @@ export function generateChord(
     inversion,
     notes,
     intervals: intervals.map(createInterval),
-    symbol
+    symbol,
+    description
   }
 }
 
