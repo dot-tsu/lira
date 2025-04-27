@@ -12,7 +12,7 @@ const QualitySelect = ({
   disabled: boolean
 }) => {
   return (
-    <div className='flex gap-2'>
+    <div className='flex flex-wrap gap-2'>
       {QUALITIES.map((rawQuality) => {
         const { quality, notation, description } = rawQuality
         return (

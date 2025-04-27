@@ -1,10 +1,11 @@
 import DamperFelt from './DamperFelt'
 import Octave from './Octave'
+import type NoteType from '@/lib/types/note'
 
 interface KeyboardProps {
   octaves?: number
   activeMidiNotes?: number[]
-  onClickNote?: VoidFunction
+  onClickNote?: (note: NoteType) => void
 }
 
 const Keyboard: React.FC<KeyboardProps> = ({
@@ -13,9 +14,9 @@ const Keyboard: React.FC<KeyboardProps> = ({
   onClickNote
 }) => {
   return (
-    <div>
+    <div className="w-full max-w-4xl mx-auto">
       <DamperFelt />
-      <div className='flex items-center justify-center'>
+      <div className='flex items-center justify-center w-full'>
         {Array.from({ length: octaves }, (_, index) => (
           <Octave
             key={index}

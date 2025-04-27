@@ -7,7 +7,7 @@ import withUpdateChord from '@/hocs/withUpdateChord'
 import type NoteType from '@/lib/types/note'
 import { useEffect, useMemo } from 'react'
 import Separator from '../../Separator'
-import { getChordUIValidationState } from '@/lib/utils/music/chordValidation' // Importar la utilidad
+import { getChordUIValidationState } from '@/lib/utils/music/chordValidation'
 
 const ChordSelectorSection = ({
   title,
@@ -63,7 +63,7 @@ const ChordSelector = ({
         disabled={uiValidationState.disableQualitySelect}
       />
 
-      <div className='flex'>
+      <div className='flex flex-wrap gap-4 lg:flex-nowrap lg:gap-4'>
         <ChordSelectorSection
           title='Suspension'
           property='suspended'
@@ -72,8 +72,7 @@ const ChordSelector = ({
           value={chord?.suspended}
           disabled={uiValidationState.disableSuspensionSelect}
         />
-        <Separator />
-
+        <Separator className='hidden lg:block' />
         <ChordSelectorSection
           title='Extension'
           property='extension'

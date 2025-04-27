@@ -260,10 +260,10 @@ export type ExtensionOption = {
 }
 
 export const EXTENSIONS: ReadonlyArray<ExtensionOption> = [
-  { value: '7', notation: '7', description: 'Bluesy and grounded' },
-  { value: '9', notation: '9', description: 'Colorful and smooth' },
-  { value: '11', notation: '11', description: 'Rich and atmospheric' },
-  { value: '13', notation: '13', description: 'Lush and jazzy' },
+  { value: '7', notation: 'maj7', description: 'Bluesy and grounded' },
+  { value: '9', notation: 'maj9', description: 'Colorful and smooth' },
+  { value: '11', notation: 'maj11', description: 'Rich and atmospheric' },
+  { value: '13', notation: 'maj13', description: 'Lush and jazzy' },
 ] as const
 
 export type AddedNoteOption = {
