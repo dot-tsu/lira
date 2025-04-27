@@ -83,20 +83,19 @@ function generateDiatonicChords(
     return null
   }
 
-  // TODO: Fix types
   return {
-    i: generateChord(scaleNotes[0], iQuality),
-    ii: generateChord(scaleNotes[1], iiQuality),
-    iii: generateChord(scaleNotes[2], iiiQuality),
-    iv: generateChord(scaleNotes[3], ivQuality),
-    v: generateChord(scaleNotes[4], vQuality, {
+    i: generateChord(scaleNotes[0], iQuality.quality),
+    ii: generateChord(scaleNotes[1], iiQuality.quality),
+    iii: generateChord(scaleNotes[2], iiiQuality.quality),
+    iv: generateChord(scaleNotes[3], ivQuality.quality),
+    v: generateChord(scaleNotes[4], vQuality.quality, {
       extension:
         'v' in chordQualities && 'extension' in chordQualities.v
           ? chordQualities.v.extension
           : undefined
     }),
-    vi: generateChord(scaleNotes[5], viQuality),
-    vii: generateChord(scaleNotes[6], viiQuality)
+    vi: generateChord(scaleNotes[5], viQuality.quality),
+    vii: generateChord(scaleNotes[6], viiQuality.quality)
   }
 }
 
