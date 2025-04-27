@@ -5,8 +5,7 @@ import { Shapes } from 'lucide-react'
 const ChordNoteDetails = ({ chord }: { chord: ChordType }) => {
   if (!chord) return null
 
-  const intervalNumbers = chord.intervals.map(interval => interval.number)
-
+  const intervalNumbers = chord.intervals?.map(interval => interval.display) || []
   const noteLetters = chord.notes.map(note => note.letter)
 
   return (

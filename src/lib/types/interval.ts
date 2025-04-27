@@ -16,36 +16,42 @@ export type IntervalQuality = 'diminished' | 'minor' | 'perfect' | 'major' | 'au
  * }
  */
 export default interface Interval {
-    /** 
-     * Full name of the interval
-     * @example "Major Third", "Perfect Fifth"
-     */
-    name: string
-    
-    /** 
-     * Abbreviated name of the interval
-     * @example "M3", "P5"
-     */
-    shortName: string
-    
-    /** 
-     * Number of semitones in the interval
-     * @example 4 for major third, 7 for perfect fifth
-     */
-    semitones: number
-    
-    /** 
-     * Frequency ratio of the interval
-     * @example 3/2 for perfect fifth, 5/4 for major third
-     */
-    ratio: string
-    
-    /** Quality of the interval */
-    quality: IntervalQuality
-    
-    /** 
-     * Diatonic number of the interval
-     * @example 2 for second, 3 for third, etc.
-     */
-    number: number
+  /**
+   * Full name of the interval
+   * @example "Major Third", "Perfect Fifth"
+   */
+  name: string
+
+  /**
+   * Abbreviated name of the interval
+   * @example "M3", "P5"
+   */
+  shortName: string
+
+  /**
+   * Number of semitones in the interval
+   * @example 4 for major third, 7 for perfect fifth
+   */
+  semitones: number
+
+  /**
+   * Frequency ratio of the interval
+   * @example 3/2 for perfect fifth, 5/4 for major third
+   */
+  ratio: string
+
+  /** Quality of the interval */
+  quality: IntervalQuality
+
+  /**
+   * Diatonic number of the interval
+   * @example 2 for second, 3 for third, etc.
+   */
+  number: number
+
+  /**
+   * Display format of the interval
+   * @example "b3" for minor third, "5" for perfect fifth
+   */
+  display: string
 }
