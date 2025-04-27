@@ -8,7 +8,7 @@ const ChordNoteDetails = ({ chord }: { chord: ChordType }) => {
   const intervalNumbers = chord.intervals.map(interval => interval.number)
 
   const intervalDisplay = intervalNumbers.join(', ')
-  const noteLetters = chord.notes.map(note => note.letter)
+  const noteLetters = chord.notes.map(note => note.letter + (note.accidental ?? ''))
 
   return (
     <div className='flex items-center text-center font-heading text-xl text-neutral-600 text-sm h-8'>
