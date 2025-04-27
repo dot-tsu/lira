@@ -164,9 +164,15 @@ export function generateChord(
     if (extNum >= 7) {
       intervals.push(EXTENSION_INTERVALS['7'][qualityName])
     }
-    if (extNum >= 9) intervals.push(EXTENSION_INTERVALS['9'])
-    if (extNum >= 11) intervals.push(EXTENSION_INTERVALS['11'])
-    if (extNum >= 13) intervals.push(EXTENSION_INTERVALS['13'])
+    if (extNum >= 9) {
+      intervals.push(EXTENSION_INTERVALS['9'])
+    }
+    if (extNum >= 11) {
+      intervals.push(EXTENSION_INTERVALS['11'])
+    }
+    if (extNum >= 13) {
+      intervals.push(EXTENSION_INTERVALS['13'])
+    }
   }
 
   added.forEach((add) => {

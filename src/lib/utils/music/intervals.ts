@@ -4,6 +4,10 @@ import type Interval from "@/lib/types/interval"
  * Create an interval object between two notes
  */
 export function createInterval(semitones: number): Interval {
+  // For intervals beyond one octave, we need to map them to their equivalent within one octave
+  const semitonesInOctave = semitones % 12
+  const octaves = Math.floor(semitones / 12)
+
   const intervalMap: Record<number, Interval> = {
     0: { name: "Perfect Unison", shortName: "P1", semitones: 0, ratio: "1/1", quality: "perfect", number: 1, display: "1" },
     1: { name: "Minor Second", shortName: "m2", semitones: 1, ratio: "16/15", quality: "minor", number: 2, display: "b2" },
@@ -20,13 +24,24 @@ export function createInterval(semitones: number): Interval {
     12: { name: "Perfect Octave", shortName: "P8", semitones: 12, ratio: "2/1", quality: "perfect", number: 8, display: "8" }
   };
 
-  return intervalMap[semitones]
+  const baseInterval = intervalMap[semitonesInOctave]
+  if (!baseInterval) return baseInterval
+
+  if (octaves > 0) {
+    return {
+      ...baseInterval,
+      number: baseInterval.number + (octaves * 7),
+      display: (baseInterval.number + (octaves * 7)).toString()
+    }
+  }
+
+  return baseInterval
 }
 
 /**
  * Calculate interval between two notes and return the corresponding interval object
  */
 export function getIntervalBetweenNotes(note1: Note, note2: Note): Interval {
-  const semitones = Math.abs(note2.midiNumber - note1.midiNumber) % 12
+  const semitones = Math.abs(note2.midiNumber - note1.midiNumber)
   return createInterval(semitones)
 }
