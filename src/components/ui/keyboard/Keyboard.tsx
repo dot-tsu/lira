@@ -1,7 +1,7 @@
 import DamperFelt from './DamperFelt'
 import Octave from './Octave'
 import type NoteType from '@/lib/types/note'
-import OrientationPrompt from './OrientationPrompt'
+import withOrientationPrompt from './OrientationPrompt'
 
 interface KeyboardProps {
   octaves?: number
@@ -16,7 +16,6 @@ const Keyboard: React.FC<KeyboardProps> = ({
 }) => {
   return (
     <div className="w-full max-w-4xl mx-auto">
-      <OrientationPrompt />
       <DamperFelt />
       <div className='flex items-center justify-center w-full'>
         {Array.from({ length: octaves }, (_, index) => (
@@ -32,4 +31,4 @@ const Keyboard: React.FC<KeyboardProps> = ({
   )
 }
 
-export default Keyboard
+export default withOrientationPrompt(Keyboard)
