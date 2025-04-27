@@ -314,6 +314,11 @@ export const CHORD_DESCRIPTIONS: ReadonlyArray<ChordDescription> = [
   },
   {
     quality: 'Major',
+    extension: '7',
+    description: 'A dreamy, jazzy chord that adds sophistication to your harmonies. Perfect for creating smooth progressions.'
+  },
+  {
+    quality: 'Major',
     extension: '9',
     description: 'A rich, colorful chord that adds sophistication. Popular in jazz and R&B for its smooth sound.'
   },
