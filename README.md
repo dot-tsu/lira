@@ -10,6 +10,4 @@ Lira will be interactive web app that makes learning chords and scales easy and 
 - Tailwind CSS
 
 Preview:
-![605_1x_shots_so](https://github.com/user-attachments/assets/441d4ed5-ca62-4ca2-a490-8eac8a139684)
-
-
+![377_1x_shots_so](https://github.com/user-attachments/assets/ed8eec88-c921-4a59-b79d-c67bdeedd370)
