@@ -18,7 +18,7 @@ const ChordNoteDetails = ({ chord }: { chord: ChordType }) => {
           {intervalDisplay}
         </span>
         <span className='text-neutral-400 mx-1'>&bull;</span>
-        <span className={`text-${COLOR}-500 min-w-[80px]`}>
+        <span className={`!text-${COLOR}-500 min-w-[80px]`}>
           ({noteLetters.join(', ')})
         </span>
       </div>
