@@ -1,10 +1,12 @@
 ---
 import '@/styles/globals.css'
 import ChordSelectorPage from '@/components/pages/ChordSelectorPage'
+import Navbar from '@/components/ui/Navbar'
 ---
 
 <html>
   <body class='font-text'>
     <ChordSelectorPage client:load />
+    <Navbar client:load currentPath={Astro.url.pathname} />
   </body>
 </html>
