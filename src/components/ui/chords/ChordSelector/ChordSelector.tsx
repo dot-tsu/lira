@@ -67,7 +67,7 @@ const ChordSelector = ({
           value={chord?.suspended}
           disabled={uiValidationState.disableSuspensionSelect}
         />
-        <Separator className='hidden lg:block h-[unset]' />  {/* TODO: This is a hack to fix the separator height, fix */}
+        <Separator className='hidden lg:block h-[unset]' />  {/* TODO: h-[unset] is a hack to fix the separator height, fix */}
 
         <ChordSelectorSection
           title='Extension'
