@@ -1,7 +1,7 @@
-import React from 'react';
+import type { ComponentType } from 'preact'
 
 const withOrientationPrompt = <P extends object>(
-  WrappedComponent: React.ComponentType<P>
+  WrappedComponent: ComponentType<P>
 ) => {
   return (props: P) => {
     return (
@@ -16,8 +16,8 @@ const withOrientationPrompt = <P extends object>(
         </div>
         <WrappedComponent {...props} />
       </>
-    );
-  };
-};
+    )
+  }
+}
 
-export default withOrientationPrompt;
+export default withOrientationPrompt

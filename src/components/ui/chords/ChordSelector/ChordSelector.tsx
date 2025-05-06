@@ -5,7 +5,7 @@ import ExtensionSelect from './Parts/ExtensionSelect'
 import AddedNotesSelect from './Parts/AddedNotesSelect'
 import withUpdateChord from '@/hocs/withUpdateChord'
 import type NoteType from '@/lib/types/note'
-import { useMemo } from 'react'
+import { useMemo } from 'preact/hooks'
 import Separator from '../../Separator'
 import { getChordUIValidationState } from '@/lib/utils/music/chordValidation'
 

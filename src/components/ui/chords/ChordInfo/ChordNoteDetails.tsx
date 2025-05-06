@@ -1,6 +1,6 @@
 import { COLOR } from '@/lib/constants/ui'
 import type ChordType from '@/lib/types/chord'
-import { Shapes } from 'lucide-react'
+import { Shapes } from 'lucide-preact'
 
 const ChordNoteDetails = ({ chord }: { chord: ChordType }) => {
   if (!chord) return null

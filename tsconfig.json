@@ -9,7 +9,7 @@
   ],
   "compilerOptions": {
     "jsx": "react-jsx",
-    "jsxImportSource": "react",
+    "jsxImportSource": "preact",
     "baseUrl": ".",
     "paths": {
       "@/*": [
@@ -17,7 +17,7 @@
       ],
       "@components/*": [
         "./src/components/*"
-      ],
+      ]
     },
     "lib": [
       "ES2015",

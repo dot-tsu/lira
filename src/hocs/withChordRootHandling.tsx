@@ -1,10 +1,11 @@
-import { useState, useCallback } from 'react'
 import type ChordType from '@/lib/types/chord'
 import type NoteType from '@/lib/types/note'
 import { generateChord } from '@/lib/utils/music/chords'
 import { getMidiNoteInfo } from '@/lib/utils/music/notes'
+import type { ComponentType } from 'preact'
+import { useState, useCallback } from 'preact/hooks'
 
-const withChordRootHandling = (WrappedComponent: React.ComponentType<any>) => {
+const withChordRootHandling = (WrappedComponent: ComponentType<any>) => {
   const DEFAULT_ROOT = getMidiNoteInfo(0)
   const DEFAULT_CHORD = generateChord(DEFAULT_ROOT, 'Major')
 

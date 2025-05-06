@@ -2,6 +2,7 @@ import DamperFelt from './DamperFelt'
 import Octave from './Octave'
 import type NoteType from '@/lib/types/note'
 import withOrientationPrompt from './OrientationPrompt'
+import type { ComponentType } from 'preact'
 
 interface KeyboardProps {
   octaves?: number
@@ -9,7 +10,7 @@ interface KeyboardProps {
   onClickNote?: (note: NoteType) => void
 }
 
-const Keyboard: React.FC<KeyboardProps> = ({
+const Keyboard: ComponentType<KeyboardProps> = ({
   octaves = 2,
   activeMidiNotes = [],
   onClickNote

@@ -1,6 +1,7 @@
 import { cn } from '@/lib/utils'
-import type { ReactNode } from 'react'
+import type { ComponentChildren } from 'preact'
 import { cva } from 'class-variance-authority'
+import type { ComponentType } from 'preact/compat'
 
 const tooltipVariants = cva(
   'absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 rounded-md whitespace-nowrap transition-all duration-200',
@@ -33,7 +34,7 @@ const arrowVariants = cva(
 )
 
 interface TooltipProps {
-  children: ReactNode
+  children: ComponentChildren
   content: string
   className?: string
   variant?: 'default' | 'light'
@@ -55,7 +56,7 @@ const Tooltip = ({ children, content, className, variant = 'default' }: TooltipP
   )
 }
 
-export const withTooltip = (WrappedComponent: React.ComponentType<any>, tooltipContent: string, variant?: 'default' | 'light') => {
+export const withTooltip = (WrappedComponent: ComponentType<any>, tooltipContent: string, variant?: 'default' | 'light') => {
   return (props: any) => (
     <Tooltip content={tooltipContent} variant={variant}>
       <WrappedComponent {...props} />

@@ -1,7 +1,7 @@
 import type ChordType from '@/lib/types/chord'
 import type NoteType from '@/lib/types/note'
 import { generateChord } from '@/lib/utils/music/chords'
-import { useCallback } from 'react'
+import { useCallback } from 'preact/hooks'
 
 interface Props {
   chord: ChordType

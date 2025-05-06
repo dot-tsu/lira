@@ -1,7 +1,9 @@
-import { buttonVariants } from "./variants"
+import { buttonVariants } from './variants'
+import type { ComponentChildren } from 'preact'
+import type { ButtonHTMLAttributes } from 'preact/compat'
 
-interface NavButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children: React.ReactNode
+interface NavButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  children: ComponentChildren
   variant?: 'default' | 'active' | 'disabled'
   isActive?: boolean
 }

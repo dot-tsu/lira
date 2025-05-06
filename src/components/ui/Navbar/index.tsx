@@ -1,4 +1,4 @@
-import { Settings, KeyboardMusic, Music } from 'lucide-react'
+import { Settings, KeyboardMusic, Music } from 'lucide-preact'
 import { withTooltip } from '../Tooltip'
 import Separator from '../Separator'
 import NavButton from './NavButton'
