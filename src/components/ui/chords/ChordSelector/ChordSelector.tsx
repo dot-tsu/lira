@@ -5,7 +5,7 @@ import ExtensionSelect from './Parts/ExtensionSelect'
 import AddedNotesSelect from './Parts/AddedNotesSelect'
 import withUpdateChord from '@/hocs/withUpdateChord'
 import type NoteType from '@/lib/types/note'
-import { useEffect, useMemo } from 'react'
+import { useMemo } from 'react'
 import Separator from '../../Separator'
 import { getChordUIValidationState } from '@/lib/utils/music/chordValidation'
 
@@ -42,11 +42,6 @@ const ChordSelector = ({
   root: NoteType
   updateChord: (updates: any) => void
 }) => {
-  useEffect(() => {
-    if (chord.root.midiNumber === root.midiNumber) return
-    updateChord({ root })
-  }, [root, updateChord, chord.root.midiNumber])
-
   const uiValidationState = useMemo(
     () => getChordUIValidationState(chord),
     [chord.quality, chord.suspended]
