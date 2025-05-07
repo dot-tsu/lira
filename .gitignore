@@ -17,5 +17,6 @@ pnpm-debug.log*
 .env
 .env.production
 
-# vscode
+# editor
 .vscode/*
+.cursor/*
