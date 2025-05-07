@@ -30,7 +30,7 @@ const MusicButton = ({
       onClick={onClick}
       disabled={disabled}
     >
-      <p className='text-md font-heading no-ligatures'>
+      <p className='text-lg font-heading no-ligatures'>
         {title}
         {label && (
           <span className={`font-medium !text-${COLOR}-500`}> ({label})</span>
