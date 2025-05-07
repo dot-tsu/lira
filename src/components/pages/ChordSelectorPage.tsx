@@ -20,7 +20,7 @@ const ChordSelectorPage = ({
 
   return (
     <div className='min-w-screen h-screen flex items-center justify-center '>
-      <div className='w-full h-full flex flex-col items-center justify-center gap-6 p-4'>
+      <div className='w-full h-full flex flex-col items-center justify-center gap-4 p-4 xl:-mt-[4.5%]'>
         <ChordInfo chord={chord} />
         <Keyboard activeMidiNotes={activeMidiNotes} onClickNote={onRootChange} />
         <ChordSelector chord={chord} onChange={setChord} root={root} />
